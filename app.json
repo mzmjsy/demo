@@ -1,0 +1,74 @@
+{
+  "pages":[
+    "page/index/index",
+    "page/login/login",
+    "page/user/user",
+    "page/logs/logs",
+    "page/catalog/catalog"
+  ],
+  "subPackages": [
+    {
+      "root": "page/attribute/",
+      "name": "attribute",
+      "pages": [
+        "pages/attributeAdd/attributeAdd",
+        "pages/attributeList/attributeList"
+      ],
+      "independent": false
+    }, 
+    {
+      "root": "page/check/",
+      "name": "check",
+      "pages": [
+        "pages/checkAdd/checkAdd",
+        "pages/checkList/checkList"
+      ],
+      "independent": false
+    }, {
+      "root": "page/repair/",
+      "name": "repair",
+      "pages": [
+        "pages/repairAdd/repairAdd",
+        "pages/repairList/repairList"
+      ],
+      "independent": false
+    }
+  ],
+  "preloadRule":{
+    "page/catalog/catalog": {
+      "network": "all",
+      "packages": [
+        "attribute",
+        "check",
+        "repair"
+      ]
+    }
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "设备智能点检",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#d1a87a",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "page/index/index",
+        "text": "首页",
+        "iconPath": "img/index.png",
+        "selectedIconPath": "img/slt-index.png"
+      },
+      {
+        "pagePath": "page/user/user",
+        "text": "我的",
+        "iconPath": "img/mine.png",
+        "selectedIconPath": "img/user-slt.png"
+      }
+    ]
+  }
+}

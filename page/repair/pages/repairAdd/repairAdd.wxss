@@ -1,0 +1,44 @@
+.weui-label {
+  font-weight: bold;
+}
+
+.add-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50rpx 26rpx 0;
+  height: 80rpx;
+  color: #fff;
+  background-color: #2fcc85;
+  border-radius: 10rpx;
+}
+
+.radio-group label {
+  display: block;
+  height: 86rpx;
+  line-height: 86rpx;
+  /* border-bottom: 1rpx solid #e2e2e2; */
+  box-sizing: border-box;
+}
+
+/* 单选框未选中 */
+radio .wx-radio-input {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 100%;
+  color: black;
+  border: 2rpx solid #666;
+}
+
+/* 单选框选中后对勾样式 */
+radio .wx-radio-input.wx-radio-input-checked::before{
+  border-radius: 100%;
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 60rpx;   
+  color:black;
+  /* background-color: green; */
+  border-color: green;
+}

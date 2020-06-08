@@ -1,0 +1,63 @@
+<view class="page__bd page__bd_spacing">
+    <form bindsubmit="formSubmit">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">设备编码:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input hidden="true" class="weui-input" name="checkId" value="{{checkEntry.checkId}}" />
+                    <input class="weui-input" name="equipmentCode" value="{{checkEntry.attribute2}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">设备名称:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="equipmentName" value="{{checkEntry.attribute3}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">点检部位:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="attributeType" value="{{checkEntry.attribute4}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">点检结果:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="checkResult" value="{{checkEntry.checkResult}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">维修情况:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入维修情况" name="repairDesc" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">维修时间:</view>
+                </view>
+                <picker mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
+                    <view class="time">
+                        <input type='text' name="attribute1" value='{{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}:{{dateTimeArray1[5][dateTime1[5]]}}' disabled="true" />
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <button class="add-btn" form-type="submit" hover-class="none">保存</button>
+    </form>
+</view>

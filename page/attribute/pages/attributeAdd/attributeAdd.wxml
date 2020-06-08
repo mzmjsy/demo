@@ -1,0 +1,73 @@
+<view class="page__bd page__bd_spacing">
+    <form bindsubmit="formSubmit">
+        <view class="hidden">
+            <input class="weui-input" name="attributeId" value="{{attributeId}}" />
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">设备编码:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入设备编码" name="equipmentCode" value="{{equipmentCode}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">设备名称:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="设备名称" name="equipmentName" value="{{equipmentName}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">点检部位:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入点检部位" name="attributeType" value="{{attributeType}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">点检内容:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入点检内容" name="attributeName" value="{{attributeName}}" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">点检标准:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入点检标准" name="equipmentStandard" value="{{equipmentStandard}}" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">输入类型:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <radio-group class="radio-group" name="inputType">
+                        <label>
+                            <radio value="text" checked="{{'text' == inputType ? 'checked' : ''}}" />文字输入
+                        </label>
+                        <label>
+                            <radio value="radio" checked="{{('radio' == inputType || '' == inputType) ? 'checked' : ''}}" />单项选择
+                        </label>
+                        <label>
+                            <radio value="number" checked="{{'number' == inputType ? 'checked' : ''}}" />数字输入
+                        </label>
+                    </radio-group>
+                </view>
+            </view>
+        </view>
+        <button class="add-btn" form-type="submit" hover-class="none">保存</button>
+    </form>
+</view>

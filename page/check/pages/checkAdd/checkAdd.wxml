@@ -1,0 +1,51 @@
+<form bindsubmit="formSubmit">
+	<view class="table">
+		<view class="tr">
+			<view class="th">编码：</view>
+			<view class="td">
+				<input type='text' name='equipmentCode' value="{{equipmentCode}}" disabled="true" />
+			</view>
+			<view class="th">名称：</view>
+			<view class="td">
+				<input type='text' name='equipmentName' value="{{equipmentName}}" disabled="true" />
+			</view>
+			<view class="th">部位：</view>
+			<view class="td">
+				<input type='text' name='attributeType' value="{{attributeType}}" disabled="true" />
+			</view>
+		</view>
+		<view class='row1' wx:if='{{attributes.length > 0}}' wx:for='{{attributes}}' wx:key='{{item.attributeId}}'>
+			<input hidden="true" name="{{'attributeName' + item.attributeId}}" value="{{item.attributeName}}" />
+			<text class='text' data-name='{{item.attributeName}}'>{{item.attributeName}}</text>
+			<view class='column2-wrapper'>
+				<radio-group name="{{'atrributes' + item.attributeId}}" wx:if="{{'radio' == item.inputType}}">
+					<radio value="Y" checked="" />是
+					<radio value="N" checked="checked" />否
+				</radio-group>
+				<view class="column-value" wx:if="{{'text' == item.inputType}}">
+					<input class="input" name="{{'atrributes' + item.attributeId}}" placeholder="请输入点检结果" value="" />
+				</view>
+				<view class="column-value" wx:if="{{'number' == item.inputType}}">
+					<input class="input" name="{{'atrributes' + item.attributeId}}" placeholder="请输入点检结果" type="digit" value="" />
+				</view>
+			</view>
+			<view class='column3-wrapper'>
+				<view class="agreement-box">
+					<checkbox-group name="{{'fault' + item.attributeId}}">
+						<checkbox class="checkbox" value="Y" />有故障
+					</checkbox-group>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 时间 -->
+	<view class="mod">
+		<text>点检时间</text>
+		<picker mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
+			<view class="time">
+				<input type='text' name="checkDate" value='{{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}:{{dateTimeArray1[5][dateTime1[5]]}}' disabled="true" />
+			</view>
+		</picker>
+	</view>
+	<button class="add-btn" form-type="submit" hover-class="none">提交</button>
+</form>

@@ -1,0 +1,11 @@
+<!--pages/login/login.wxml-->
+<view class="login">
+    <image src="../../img/logo.png" ></image>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="section">
+            <input name="userName" class="{{ userName == true ? 'userError' : ''}}" type="text" auto-focus maxlength="11" placeholder="请输入用户名" value="vappadmin" />
+            <input name="userPassword" class="{{ userPassword == true ? 'userError' : ''}}" type="text" password  maxlength="100" placeholder="请输入密码" value="meideadmin" />
+        </view>
+        <button type="default" formType="submit" hover-class="other-button-hover"> 登录 </button>
+    </form>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "设备属性列表",
+  "usingComponents": {
+    "etable" : "/compenents/etable/etable"
+  }
+}

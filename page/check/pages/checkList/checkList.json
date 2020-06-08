@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "点检结果列表",
+  "usingComponents": {
+    "etable" : "/compenents/etable/etable"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "维修结果列表",
+  "usingComponents": {
+    "etable" : "/compenents/etable/etable"
+  }
+}

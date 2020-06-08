@@ -1,0 +1,56 @@
+<view class='nav'>
+    <view class='conlumn'>
+        <navigator url="/pages/goods/goods" hover-class='none'>
+            <image src='../../img/repair-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getAttributeList' data-index="attributeList">
+                    <image src='../../img/guanjian.png'></image>
+                    <view>设备属性列表显示</view>
+                </view>
+            </image>
+        </navigator>
+        <navigator url='/pages/groupList/groupList' hover-class='none'>
+            <image src='../../img/check-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getScancode' data-index="attribute">
+                    <image src='../../img/santong.png'></image>
+                    <view>录入设备属性信息</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url="/pages/goods/goods" hover-class='none'>
+            <image src='../../img/shop-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getScancode' data-index="check">
+                    <image src='../../img/gangmao.png'></image>
+                    <view>录入设备点检结果</view>
+                </view>
+            </image>
+        </navigator>
+        <navigator url='/pages/groupList/groupList' hover-class='none'>
+            <image src='../../img/activity-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getCheckList' data-index="checkList">
+                    <image src='../../img/famen.png'></image>
+                    <view>查看点检结果信息</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='/pages/house/house' hover-class='none'>
+            <image src='../../img/home-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getScancode' data-index="repair">
+                    <image src='../../img/shebei.png'></image>
+                    <view>设备故障信息显示</view>
+                </view>
+            </image>
+        </navigator>
+        <navigator url='/pages/teamBuy/teamBuy' hover-class='none'>
+            <image src='../../img/online-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getRepairList' data-index="repairList">
+                    <image src='../../img/shebei1.png'></image>
+                    <view>查看故障维修情况</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+</view>
