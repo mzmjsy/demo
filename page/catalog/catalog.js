@@ -5,13 +5,17 @@ const repair = wx.getStorageSync('repair');
 Page({
   data: {
     result: '',
-    admin: admin,
-    check: check,
-    repair: repair
+    admin: '',
+    check: '',
+    repair: ''
   },
 
-  onLoad: function() {
-    
+  onLoad: function(options) {
+    this.setData({
+      admin: admin,
+      check: check,
+      repair: repair
+    })
   },
 
   getScancode: function(event) {

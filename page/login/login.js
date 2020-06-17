@@ -3,12 +3,16 @@ const common = require("../../utils/util");
 Page({
   data:{
     userName: false,
-    userPassword: false
+    userPassword: false,
+    admin: '',
+    check: '',
+    repair: ''
   },
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+
   },
   login:function(params){
+    var that = this;
     wx.showLoading({
       title: '登录中'
     })
@@ -28,13 +32,15 @@ Page({
           var roleId = data.roles[i]['roleId'];
 
           if (581 == roleId) {
-            wx.setStorageSync('admin', roleId);
+            wx.setStorageSync('admin', 581);
           }
+
           if (582 == roleId) {
-            wx.setStorageSync('check', roleId);
+            wx.setStorageSync('check', 582);
           }
+
           if (583 == roleId) {
-            wx.setStorageSync('repair', roleId);
+            wx.setStorageSync('repair', 583);
           }
         }
 

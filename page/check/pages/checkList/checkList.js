@@ -63,7 +63,6 @@ Page({
       criteria: criteria,
       sessionId: sessionId
 		}, function (data) {
-			console.log(data);
 			if (0 != data.total) {
 				wx.hideLoading();
         that.setData({

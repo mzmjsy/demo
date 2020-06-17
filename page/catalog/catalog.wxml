@@ -40,7 +40,7 @@
         </navigator>
         <navigator url='/pages/groupList/groupList' hover-class='none'>
             <image src='../../img/activity-bg.png' class='nav-pic'>
-                <view class='icon-wrap' wx:if='{{582 == check}}' bindtap='getCheckList' data-index="checkList">
+                <view class='icon-wrap' wx:if='{{582 == check || 583 == repair}}' bindtap='getCheckList' data-index="checkList">
                     <image src='../../img/famen.png'></image>
                     <view>查看点检结果信息</view>
                 </view>
