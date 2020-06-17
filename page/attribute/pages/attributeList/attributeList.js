@@ -1,4 +1,5 @@
 const common = require('../../../../utils/util.js');
+const sessionId = wx.getStorageSync('sessionId');
 
 Page({
   data: {
@@ -42,9 +43,9 @@ Page({
 		orderbyArr.push(orderby);
 		criteria._orderby = orderbyArr;
     common.httpPost('com.md.djxmZs.apppropertiesinfobiz.queryAppPropertiesInfos.biz.ext', {
-			criteria: criteria
+      criteria: criteria,
+      sessionId: sessionId
 		}, function (data) {
-			console.log(data);
 			if (0 != data.total) {
 				wx.hideLoading();
         that.setData({

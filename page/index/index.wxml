@@ -1,12 +1,11 @@
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<swiper class="" indicator-dots="true" autoplay="true" interval="4000" duration="1000">
+  <block wx:for="{{picList}}" wx:key="index">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" mode="aspectFill" bindtap='previewImg' data-previewurl='{{picList}}'
+      data-currenturl='{{item}}'/>
+    </swiper-item>   
+  </block>  
+</swiper>
+<view class="font">
+    玫德集团设备点检员、维修员使用的小程序，旨在通过在小程序中录入对设备的点检信息，从而节省纸质信息的录入。可以更好的对点检数据进行保存，更便于领导的检查。
 </view>

@@ -2,7 +2,7 @@
   "pages":[
     "page/index/index",
     "page/login/login",
-    "page/user/user",
+    "page/grant/grant",
     "page/logs/logs",
     "page/catalog/catalog"
   ],
@@ -64,7 +64,7 @@
         "selectedIconPath": "img/slt-index.png"
       },
       {
-        "pagePath": "page/user/user",
+        "pagePath": "page/login/login",
         "text": "我的",
         "iconPath": "img/mine.png",
         "selectedIconPath": "img/user-slt.png"

@@ -1,6 +1,17 @@
+const admin = wx.getStorageSync('admin');
+const check = wx.getStorageSync('check');
+const repair = wx.getStorageSync('repair');
+
 Page({
   data: {
-    result: ''
+    result: '',
+    admin: admin,
+    check: check,
+    repair: repair
+  },
+
+  onLoad: function() {
+    
   },
 
   getScancode: function(event) {
@@ -10,30 +21,35 @@ Page({
       onlyFromCamera:true,
       success: (res) => {
         var result = res.result;
-        var data = '?equipmentCode='+result.split("@")[0]+'&equipmentName='+result.split("@")[1]+'&attributeType='+result.split("@")[2];
+        if (4 == result.split("@").length) {
+          var data = '?equipmentCode='+result.split("@")[1]+'&equipmentName='+result.split("@")[2]+'&attributeType='+result.split("@")[3];
         
-        switch(type) {
-          case 'attribute':
-            wx.redirectTo({
-              url: '../attribute/pages/attributeAdd/attributeAdd'+data
-            })
-          case 'check':
-            wx.redirectTo({
-              url: '../check/pages/checkAdd/checkAdd'+data
-            })
-          case 'repair':
-            wx.redirectTo({
-              url: '../check/pages/checkList/checkList'+data
-            })
+          switch(type) {
+            case 'attribute':
+              wx.navigateTo({
+                url: '../attribute/pages/attributeAdd/attributeAdd'+data
+              });
+            case 'check':
+              wx.navigateTo({
+                url: '../check/pages/checkAdd/checkAdd'+data
+              });
+            case 'repair':
+              wx.navigateTo({
+                url: '../check/pages/checkList/checkList'+data
+              });
+          }
+        } else {
+          wx.showModal({
+            title: '获取失败',
+            content: '二维码数据不正确',
+            confirmColor: '#b02923',
+            showCancel: false
+          })
         }
       }
     })
   },
   
-  onLoad: function() {
-
-  },
-
   //跳转到设备属性查询页面
   getAttributeList: function() {
     wx.redirectTo({
@@ -43,21 +59,24 @@ Page({
 
   //跳转到点检结果查询页面
   getCheckList: function() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../check/pages/checkList/checkList?equipmentCode=null'
     })
   },
 
   getRepairList: function() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../repair/pages/repairList/repairList'
     })
   },
   
   //跳转到故障设备信息显示页面
   getRepairAdd: function() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../repair/pages/repairAdd/repairAdd'
     })
+  },
+  onUnload: function () {
+    
   },
 })

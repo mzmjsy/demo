@@ -1,7 +1,5 @@
-// pages/login/login.js
-const app = getApp();
 const common = require("../../utils/util");
-const wxurl = app.globalData.wxUrl;
+
 Page({
   data:{
     userName: false,
@@ -15,87 +13,54 @@ Page({
       title: '登录中'
     })
 
-    common.httpPost('com.vplus.login.weblogin.flow.biz.ext', {
-			userId:params.userName,
-      password:params.passWord
+    wx.setStorageSync('userName', params.userName);
+    var mpUser = {};
+    mpUser.user_code = params.userName;
+    mpUser.password = params.passWord;
+    common.httpPost('com.md.executivesLog.denglu.login.biz.ext', {
+			mpUser: mpUser
 		}, function (data) {
-      console.log(data);
-      setTimeout(function(){
-        wx.reLaunch({
-          url: '../catalog/catalog',
-        },5000)
-      })
-			// if ("1" == data.retCode) {
-			// 	wx.showToast({
-			// 		title: '保存成功',
-			// 		icon: 'success'
-			// 	})
-			// } else {
-			// 	wx.showModal({
-			// 		title: '保存失败',
-			// 		image: '../../img/fail.jpg'
-			// 	})
-			// }
-		});
+      var retCode = data.retCode;
+			if ("0" == retCode) {
+        wx.setStorageSync('sessionId', data.date.sessionId);
 
-    // wx.request({
-    //   url: 'http://10.0.1.37/mdapp/com.vplus.login.weblogin.flow.biz.ext',
-    //   data:{
-    //     userId:params.userName,
-    //     password:params.passWord
-    //   },
-    //   method: 'POST',
-    //   dataType: 'json',
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-    //   },
-    //   success:function(res){
-    //     console.log(res);
-    //     if(res.statusCode ==200){
-    //       if(res.data.retFalg == 'F'){
-    //         wx.hideLoading({
-    //           complete(){
-    //             wx.showModal({
-    //               title: '登录失败',
-    //               content: res.data.retMsg,
-    //               confirmColor: '#b02923',
-    //               showCancel: false
-    //             })
-    //           }
-    //         });
-    //       } else {
-    //         wx.setStorageSync('cookies', res.cookies),
-    //         wx.hideLoading();
-    //         wx.showToast({
-    //           title:"登录成功",
-    //           icon:"Yes",
-    //           success:function(){
-    //             setTimeout(function(){
-    //               wx.redirectTo({
-    //                 url: '../catalog/catalog',
-    //               },5000)
-    //             })
-    //           }
-    //         })
-    //       }
-    //     }
-    //   },
-    //   fail: function(res){
-    //     wx.hideLoading();
-    //     wx.showModal({
-    //       title: '登录失败',
-    //       content: '链接不正确',
-    //       confirmColor: '#b02923',
-    //       showCancel: false
-    //     })
-    //     return false;
-    //   }
-    // })
+        for (var i in data.roles) {
+          var roleId = data.roles[i]['roleId'];
+
+          if (581 == roleId) {
+            wx.setStorageSync('admin', roleId);
+          }
+          if (582 == roleId) {
+            wx.setStorageSync('check', roleId);
+          }
+          if (583 == roleId) {
+            wx.setStorageSync('repair', roleId);
+          }
+        }
+
+				wx.showToast({
+					title: '登录成功',
+          icon: 'success',
+          success () {
+            wx.reLaunch({
+              url: '../catalog/catalog',
+            })
+          }
+				})
+			} else {
+				wx.showModal({
+					title: '-1' == retCode ? '用户名不存在' : '密码错误',
+					icon: 'none'
+				})
+			}
+		});
   },
   formSubmit: function(e) {
     let that = this;
     let userName = e.detail.value.userName;
     let userPassword = e.detail.value.userPassword;
+    that.grant();
+
     if(userName == '' ){
         this.setData({
           userName: true,
@@ -122,6 +87,51 @@ Page({
       'passWord': userPassword
     }
     that.login(params);
+  },
+  grant:function(){
+    var that = this;
+    
+    // 查看是否授权
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+              success: function (res) {
+                wx.checkSession({
+                  success() {
+                      
+                  },
+                  fail() {
+                    // session_key 已经失效，需要重新执行登录流程
+                    wx.login({
+                      success: res => {
+                        wx.request({
+                          url: 'https://api.weixin.qq.com/sns/jscode2session',
+                          data: {
+                            appid: 'wxcafc4d24962823ba',
+                            secret: '09aed08ba915e777d5ce5f89884860aa',
+                            js_code: res.code,
+                            grant_type: 'authorization_code'
+                          },
+                          success: res => {
+                            console.log(res.data.openid);
+                            wx.setStorageSync('openid', res.data.openid);
+                            wx.setStorageSync('session_key', res.data.session_key);
+                          }
+                        });
+                      }
+                    });
+                  }
+                })
+              }
+          });
+        } else {
+          wx.reLaunch({
+            url: '../grant/grant'
+          })
+        }
+      }
+    });
   },
   onReady:function(){
     // 页面渲染完成

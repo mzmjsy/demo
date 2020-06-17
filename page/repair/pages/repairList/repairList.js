@@ -1,12 +1,13 @@
 const common = require('../../../../utils/util.js');
+const sessionId = wx.getStorageSync('sessionId');
 
 Page({
   data: {
     config:{
       content: [],
       titles: ['点检内容', '维修情况', '维修时间'],
-      props : ['checkId', 'repairDesc', 'attribute1'],
-      columnWidths: ['300rpx', '200rpx','200rpx'],
+      props : ['attributeName', 'repairDesc', 'repairDate'],
+      columnWidths: ['250rpx', '300rpx','180rpx'],
       hides: ['block','block','block'],
       border: true,
       stripe: true,
@@ -35,21 +36,28 @@ Page({
 		})
     var that = this;
 		var criteria = new Object();
-		criteria._entity = 'com.md.djxmZs.djxmZs.AppRepairEntry';
+    criteria._entity = 'com.md.djxmZs.djxmZs.AppCheckRepairV';
+    var expr = new Array();
+    var expr1 = new Object();
+    expr1.isFault = 'Y';
+    expr1._op = "=";
+    expr.push(expr1);
+    criteria._expr = expr;
 		var orderby = new Object();
 		var orderbyArr = new Array();
 		orderby._sort = "desc";
-		orderby._property = "attribute1";
+		orderby._property = "repairDate";
 		orderbyArr.push(orderby);
 		criteria._orderby = orderbyArr;
-    common.httpPost('executivesLog/djxmZs/com.md.djxmZs.apprepairentrybiz.queryAppRepairEntrys.biz.ext', {
-			criteria: criteria
+    common.httpPost('executivesLog/djxmZs/com.md.djxmZs.appCheckRepairV.queryappCheckRepairVS.biz.ext', {
+      criteria: criteria,
+      sessionId: sessionId
 		}, function (data) {
 			console.log(data);
 			if (0 != data.total) {
 				wx.hideLoading();
         that.setData({
-          'config.content': data.apprepairentrys
+          'config.content': data.appCheckRepairVs
         });
 			} else {
 				wx.showToast({

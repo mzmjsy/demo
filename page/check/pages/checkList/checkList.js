@@ -1,4 +1,5 @@
 const common = require('../../../../utils/util.js');
+const sessionId = wx.getStorageSync('sessionId');
 
 Page({
   data: {
@@ -6,8 +7,8 @@ Page({
       content: [],
       titles: ['ID', '设备编码', '设备名称', '点检部位', '点检内容', '结果', '时间', '是否故障'],
       props : ['checkId', 'attribute2', 'attribute3', 'attribute4', 'attributeName', 'checkResult', 'attribute1', 'isFault'],
-      columnWidths: ['0rpx', '0rpx', '0rpx', '0rpx', '300rpx', '130rpx','200rpx', '100rpx'],
-      hides: ['none', 'none', 'none','none','block','block','block','block'],
+      columnWidths: ['0rpx', '0rpx', '0rpx', '100rpx', '200rpx', '130rpx','200rpx', '100rpx'],
+      hides: ['none', 'none', 'none','block','block','block','block','block'],
       border: true,
       stripe: true,
       type: 'check',
@@ -39,7 +40,7 @@ Page({
 		var criteria = new Object();
     criteria._entity = 'com.md.djxmZs.djxmZs.AppCheckEntry';
 
-    if ('null' != equipmentCode) {
+    if ('null' != equipmentCode && '' != equipmentCode && null != equipmentCode) {
       var expr = new Array();
       var expr1 = new Object();
       expr1.attribute2 = equipmentCode;
@@ -59,7 +60,8 @@ Page({
 		orderbyArr.push(orderby);
 		criteria._orderby = orderbyArr;
     common.httpPost('com.md.djxmZs.appcheckentrybiz.queryAppCheckEntrys.biz.ext', {
-			criteria: criteria
+      criteria: criteria,
+      sessionId: sessionId
 		}, function (data) {
 			console.log(data);
 			if (0 != data.total) {

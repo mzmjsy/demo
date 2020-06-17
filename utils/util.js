@@ -72,7 +72,6 @@ function httpP(url, data, callback) {
 }
 
 function httpPost(url, data, callback){
-  console.log(wxurl + url);
   wx.request({
     url: wxurl + url,
     data: data,

@@ -1,4 +1,5 @@
 var common = require("../../../../utils/util.js");
+const sessionId = wx.getStorageSync('sessionId');
 
 Page({
   data:{
@@ -40,12 +41,12 @@ Page({
 			mask: true
     })
     
-    console.log(dt)
     var url = '' == dt['attributeId'] ? 'executivesLog/djxmZs/com.md.djxmZs.apppropertiesinfobiz.addAppPropertiesInfo.biz.ext' : 'executivesLog/djxmZs/com.md.djxmZs.apppropertiesinfobiz.updateAppPropertiesInfo.biz.ext';
     
     //提交
 		common.httpPost(url, {
-			apppropertiesinfo: dt
+      apppropertiesinfo: dt,
+      sessionId: sessionId
 		}, function (data) {
 			if ("1" == data.retCode) {
 				wx.showToast({

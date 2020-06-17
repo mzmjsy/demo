@@ -48,24 +48,23 @@ Component({
   methods: {
     bindChange: function(e){
       var data = e.currentTarget.dataset;
-      console.log(data);
-      switch(data.typ) {
-        case 'attribute':
+
+      if ('attribute' == data.typ) {
+        wx.navigateTo({
+          url: '../attributeAdd/attributeAdd?equipmentCode=null&equipmentName=null&attributeType=null&equipment='+JSON.stringify(data.content)
+        })
+      } else if ('check' == data.typ) {
+        var content = data.content;
+        if ("Y" == content.isFault) {
           wx.navigateTo({
-            url: '../attributeAdd/attributeAdd?equipmentCode=null&equipmentName=null&attributeType=null&equipment='+JSON.stringify(data.content)
+            url: '/page/repair/pages/repairAdd/repairAdd?checkId='+content.checkId
           })
-        case 'check':
-          var content = data.content;
-          if ("Y" == content.isFault) {
-            wx.navigateTo({
-              url: '/page/repair/pages/repairAdd/repairAdd?checkId='+content.checkId
-            })
-          } else {
-            wx.showToast({
-              title: '点检结果无故障，不需修改',
-              icon: "none"
-            })
-          }
+        } else {
+          wx.showToast({
+            title: '点检结果无故障，不需修改',
+            icon: "none"
+          })
+        }
       }
     }
   },

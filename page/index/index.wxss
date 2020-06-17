@@ -1,21 +1,13 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+page{
+  background: #f9f9f9;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.slide-image{
+  width: 96%;
+  margin-left: 6px;
 }
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+.font {
+  text-indent: 80rpx;
+  font-family: Microsoft Yahei;
+  padding: 10rpx 20rpx 10rpx 25rpx;
+  margin-top: 30px;
 }

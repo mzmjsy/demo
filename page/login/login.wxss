@@ -1,4 +1,4 @@
-/* pages/login/login.wxss */
+pages/login/login.wxss
 page{
   background-color:#fff;
   font-size:40rpx;
@@ -17,21 +17,27 @@ input{
   margin:5% auto;
   padding-left:20rpx;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 20px;
 }
 .button-hover {
   background-color: #b02923;
+  border-radius: 20px;
 }
 /** 添加自定义button点击态样式类**/
 .other-button-hover {
   background-color: #b02923;
   color:#fff;
+  border-radius: 20px;
 }
 button{
   background-color: #b02923;
   color:#fff;
   top:150rpx;
-  width:80%;
+  width:100%;
+}
+.bottom{
+  border-radius: 20px;
 }
 .userError{
   border-color:#b02923;

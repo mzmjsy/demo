@@ -7,7 +7,7 @@
   </view>
   <view class='etable-content'>
     <view wx:for="{{config.content}}" wx:for-index="outIndex" wx:for-item="outItem" wx:key="{{outIndex}}" class="etable-content-row {{config.stripe?(outIndex%2 === 0 ? 'etable-content-row-bg1':'etable-content-row-bg2'):''}}" data-content='{{outItem}}' data-typ='{{config.type}}' bindtap="bindChange">
-      <view wx:for="{{config.props}}" wx:key="{{outIndex}}-1-{{index}}" style="width:{{config.columnWidths[index]}};display:{{config.hides[index]}}" class="etable-content-column {{'Y' == outItem.isFault ? 'warning' : ''}} {{config.border?'etable-content-column-border':''}}">
+      <view wx:for="{{config.props}}" wx:key="{{outIndex}}-1-{{index}}" style="width:{{config.columnWidths[index]}};display:{{config.hides[index]}}" class="etable-content-column {{'Y' == outItem.isFault && 'Y' != outItem.isRepair ? 'warning' : ''}} {{config.border?'etable-content-column-border':''}}">
         {{null == outItem[item] ? '' : ('Y' == outItem[item] ? '是' : ('N' == outItem[item] ? '否' : outItem[item]))}}
       </view>
     </view>

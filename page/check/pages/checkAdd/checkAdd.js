@@ -1,6 +1,7 @@
 const dateTimePicker = require('../../../../utils/dateTimePicker.js');
 const common = require('../../../../utils/util.js');
-const cookies = wx.getStorageSync('cookies');
+const userName = wx.getStorageSync('userName');
+const sessionId = wx.getStorageSync('sessionId');
 
 Page({
 	/**
@@ -11,7 +12,6 @@ Page({
 		equipmentname: '',
 		attributetype: '',
 		list: '',
-		cookies: cookies,
 		attributes: '',
 		currentDate: '',
 		dateTimeArray1: null,
@@ -31,7 +31,6 @@ Page({
 			equipmentCode: options.equipmentCode,
 			equipmentName: options.equipmentName,
 			attributeType: options.attributeType,
-			cookies: cookies,
 			attributes: [],
 			dateTimeArray1: obj1.dateTimeArray,
 			dateTime1: obj1.dateTime
@@ -72,7 +71,8 @@ Page({
 		hide._op = "=";
 		criteria._expr = hide;
 		common.httpPost('executivesLog/djxmZs/com.md.djxmZs.apppropertiesinfobiz.queryAppPropertiesInfos.biz.ext', {
-			criteria: criteria
+			criteria: criteria,
+			sessionId: sessionId
 		}, function (data) {
 			wx.hideLoading();
 			that.setData({
@@ -105,6 +105,7 @@ Page({
 				obj.checkResult = value;
 				obj.attribute1 = data.checkDate;
 				obj.isFault = (0 == data['fault' + id].length ? 'N' : data['fault' + id][0]);
+				obj.attribute5 = userName;
 				list.push(obj);
 				
 				if ('' == value) {
@@ -118,7 +119,8 @@ Page({
 		}
 
 		common.httpPost('executivesLog/djxmZs/com.md.djxmZs.appcheckentrybiz.addAppCheckEntryArray.biz.ext', {
-			appcheckentryArray: list
+			appcheckentryArray: list,
+			sessionId: sessionId
 		}, function (data) {
 			console.log(data);
 			wx.hideLoading();
@@ -135,7 +137,7 @@ Page({
 			} else {
 				wx.showModal({
 					title: '保存失败',
-					image: '../../../../img/fail.jpg'
+					icon: 'none'
 				})
 			}
 		});

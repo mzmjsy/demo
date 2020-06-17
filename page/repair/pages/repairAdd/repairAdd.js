@@ -1,5 +1,7 @@
 const common = require('../../../../utils/util.js');
 var dateTimePicker = require('../../../../utils/dateTimePicker.js');
+const userName = wx.getStorageSync('userName');
+const sessionId = wx.getStorageSync('sessionId');
 
 Page({
   data: {
@@ -53,7 +55,8 @@ Page({
 
 		criteria.checkId = checkId;
 		common.httpPost('executivesLog/djxmZs/com.md.djxmZs.appcheckentrybiz.getAppCheckEntry.biz.ext', {
-			appcheckentry: criteria
+			appcheckentry: criteria,
+			sessionId: sessionId
 		}, function (data) {
 			console.log(data);
 			wx.hideLoading();
@@ -81,9 +84,11 @@ Page({
 	  });
 		
 		data.isRepair = 'Y';
+		data.repairOperator = userName;
     //提交
 		common.httpPost('executivesLog/djxmZs/com.md.djxmZs.apprepairentrybiz.addAppRepairEntry.biz.ext', {
-			apprepairentry: data
+			apprepairentry: data,
+			sessionId: sessionId
 		}, function (data) {
 			if ("1" == data.retCode) {
 				wx.showToast({
