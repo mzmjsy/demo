@@ -5,10 +5,10 @@ Page({
   data: {
     config:{
       content: [],
-      titles: ['ID', '设备编码', '设备名称', '点检部位', '点检内容', '结果', '时间', '是否故障'],
-      props : ['checkId', 'attribute2', 'attribute3', 'attribute4', 'attributeName', 'checkResult', 'attribute1', 'isFault'],
-      columnWidths: ['0rpx', '0rpx', '0rpx', '100rpx', '200rpx', '130rpx','200rpx', '100rpx'],
-      hides: ['none', 'none', 'none','block','block','block','block','block'],
+      titles: ['ID', '设备编码', '设备名称', '点检部位内容', '结果', '时间', '是否故障', '是否维修'],
+      props : ['checkId', 'equipmentCode', 'equipmentName', 'attributeName', 'checkResult', 'checkDate', 'isFault', 'isRepair'],
+      columnWidths: ['0rpx', '0rpx', '0rpx', '300rpx', '130rpx','200rpx', '100rpx', '0rpx'],
+      hides: ['none', 'none', 'none','block','block','block','block','none'],
       border: true,
       stripe: true,
       type: 'check',
@@ -38,35 +38,41 @@ Page({
     var that = this;
     var equipmentCode = options.equipmentCode;
 		var criteria = new Object();
-    criteria._entity = 'com.md.djxmZs.djxmZs.AppCheckEntry';
+    criteria._entity = 'com.md.djxmZs.djxmZs.AppCheckRepairV';
+
+    var expr = new Array();
+    var expr1 = new Object();
+    expr1.checkResult = ' ';
+    expr1._op = "<>";
+    expr.push(expr1);
 
     if ('null' != equipmentCode && '' != equipmentCode && null != equipmentCode) {
-      var expr = new Array();
-      var expr1 = new Object();
-      expr1.attribute2 = equipmentCode;
-      expr1._op = "=";
-      expr.push(expr1);
       var expr2 = new Object();
-      expr2.isFault = 'Y';
+      expr2.equipmentCode = equipmentCode;
       expr2._op = "=";
       expr.push(expr2);
-      criteria._expr = expr;
+      var expr3 = new Object();
+      expr3.isFault = 'Y';
+      expr3._op = "=";
+      expr.push(expr3);
     }
+    criteria._expr = expr;
 
 		var orderby = new Object();
 		var orderbyArr = new Array();
 		orderby._sort = "desc";
-		orderby._property = "attribute1";
+		orderby._property = "checkDate";
 		orderbyArr.push(orderby);
 		criteria._orderby = orderbyArr;
-    common.httpPost('com.md.djxmZs.appcheckentrybiz.queryAppCheckEntrys.biz.ext', {
+    common.httpPost('executivesLog/djxmZs/com.md.djxmZs.appCheckRepairV.queryappCheckRepairVS.biz.ext', {
       criteria: criteria,
+      pageSize: 5000,
       sessionId: sessionId
 		}, function (data) {
 			if (0 != data.total) {
 				wx.hideLoading();
         that.setData({
-          'config.content': data.appcheckentrys
+          'config.content': data.appCheckRepairVs
         });
 			} else {
 				wx.showToast({

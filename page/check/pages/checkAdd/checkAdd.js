@@ -1,5 +1,6 @@
 const dateTimePicker = require('../../../../utils/dateTimePicker.js');
 const common = require('../../../../utils/util.js');
+const log = require('../../../../utils/log.js');
 const userName = wx.getStorageSync('userName');
 const sessionId = wx.getStorageSync('sessionId');
 
@@ -117,6 +118,7 @@ Page({
 				}
 			}
 		}
+		log.info('点检员：' + userName + '，信息：【' + data + '】，点检时间：' + data.checkDate);
 
 		common.httpPost('executivesLog/djxmZs/com.md.djxmZs.appcheckentrybiz.addAppCheckEntryArray.biz.ext', {
 			appcheckentryArray: list,

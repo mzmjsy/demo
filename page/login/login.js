@@ -1,15 +1,20 @@
 const common = require("../../utils/util");
+const log = require('../../utils/log');
 
 Page({
   data:{
-    userName: false,
-    userPassword: false,
+    userName: '',
+    userPassword: '',
     admin: '',
     check: '',
     repair: ''
   },
   onLoad:function(options){
-
+    console.log(wx.getStorageSync('userName'));
+    this.setData({
+      userName: wx.getStorageSync('userName'),
+      userPassword: wx.getStorageSync('passWord')
+    })
   },
   login:function(params){
     var that = this;
@@ -18,6 +23,7 @@ Page({
     })
 
     wx.setStorageSync('userName', params.userName);
+    wx.setStorageSync('passWord', params.passWord);
     var mpUser = {};
     mpUser.user_code = params.userName;
     mpUser.password = params.passWord;
@@ -43,7 +49,7 @@ Page({
             wx.setStorageSync('repair', 583);
           }
         }
-
+        log.info('登录用户名：' + params.userName + '登录权限：【' + wx.getStorageSync('admin') + '，' + wx.getStorageSync('check') + '，' + wx.getStorageSync('repair') + '】' + '，登录时间：' + common.formatTime(new Date()));
 				wx.showToast({
 					title: '登录成功',
           icon: 'success',
@@ -120,7 +126,6 @@ Page({
                             grant_type: 'authorization_code'
                           },
                           success: res => {
-                            console.log(res.data.openid);
                             wx.setStorageSync('openid', res.data.openid);
                             wx.setStorageSync('session_key', res.data.session_key);
                           }

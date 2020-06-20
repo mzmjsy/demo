@@ -39,14 +39,17 @@ Page({
 		var orderby = new Object();
 		var orderbyArr = new Array();
 		orderby._sort = "desc";
-		orderby._property = "equipmentCode";
+		orderby._property = "attributeId";
 		orderbyArr.push(orderby);
-		criteria._orderby = orderbyArr;
+    criteria._orderby = orderbyArr;
+    
     common.httpPost('com.md.djxmZs.apppropertiesinfobiz.queryAppPropertiesInfos.biz.ext', {
       criteria: criteria,
+      pageSize: 5000,
       sessionId: sessionId
 		}, function (data) {
 			if (0 != data.total) {
+        console.log(data.apppropertiesinfos);
 				wx.hideLoading();
         that.setData({
           'config.content': data.apppropertiesinfos

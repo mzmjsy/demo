@@ -3,7 +3,6 @@
     "page/index/index",
     "page/login/login",
     "page/grant/grant",
-    "page/logs/logs",
     "page/catalog/catalog"
   ],
   "subPackages": [

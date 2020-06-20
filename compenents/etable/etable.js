@@ -55,13 +55,18 @@ Component({
         })
       } else if ('check' == data.typ) {
         var content = data.content;
-        if ("Y" == content.isFault) {
+        if ("Y" == content.isFault && 'Y' != content.isRepair) {
           wx.navigateTo({
             url: '/page/repair/pages/repairAdd/repairAdd?checkId='+content.checkId
           })
-        } else {
+        } else if ("N" == content.isFault) {
           wx.showToast({
             title: '点检结果无故障，不需修改',
+            icon: "none"
+          })
+        } else if ("Y" == content.isFault && 'Y' == content.isRepair) {
+          wx.showToast({
+            title: '设备有故障但已维修，不需维修',
             icon: "none"
           })
         }

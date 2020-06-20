@@ -2,10 +2,10 @@
     <image src="../../img/logo.png" ></image>
     <form bindsubmit="formSubmit" bindreset="formReset">
         <view class="section">
-            <input name="userName" class="{{ userName == true ? 'userError' : ''}}" type="text" auto-focus maxlength="20" placeholder="请输入用户名" value="" />
+            <input name="userName" class="{{ userName == true ? 'userError' : ''}}" type="text" auto-focus maxlength="20" placeholder="请输入用户名" value="{{userName}}" />
         </view>
         <view>
-            <input name="userPassword" class="{{ userPassword == true ? 'userError' : ''}}" type="text" password  maxlength="100" placeholder="请输入密码" value="" />
+            <input name="userPassword" class="{{ userPassword == true ? 'userError' : ''}}" type="text" password  maxlength="100" placeholder="请输入密码" value="{{userPassword}}" />
         </view>
         <button type="primary" class='bottom' formType="submit" hover-class="other-button-hover"> 登录 </button>
     </form>

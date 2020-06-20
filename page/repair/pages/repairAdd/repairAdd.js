@@ -1,5 +1,6 @@
 const common = require('../../../../utils/util.js');
 var dateTimePicker = require('../../../../utils/dateTimePicker.js');
+const log = require('../../../../utils/log.js');
 const userName = wx.getStorageSync('userName');
 const sessionId = wx.getStorageSync('sessionId');
 
@@ -81,10 +82,13 @@ Page({
 
 	 	wx.showLoading({
 			title: '数据保存中'
-	  });
+		});
 		
 		data.isRepair = 'Y';
 		data.repairOperator = userName;
+
+		log.info('维修员：' + userName + '信息：【' + data + '】，时间：' + common.formatTime(new Date()));
+
     //提交
 		common.httpPost('executivesLog/djxmZs/com.md.djxmZs.apprepairentrybiz.addAppRepairEntry.biz.ext', {
 			apprepairentry: data,

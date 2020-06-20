@@ -51,9 +51,9 @@ Page({
 		criteria._orderby = orderbyArr;
     common.httpPost('executivesLog/djxmZs/com.md.djxmZs.appCheckRepairV.queryappCheckRepairVS.biz.ext', {
       criteria: criteria,
+      pageSize: 5000,
       sessionId: sessionId
 		}, function (data) {
-			console.log(data);
 			if (0 != data.total) {
 				wx.hideLoading();
         that.setData({

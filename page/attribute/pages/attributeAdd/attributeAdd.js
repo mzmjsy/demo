@@ -1,5 +1,7 @@
 var common = require("../../../../utils/util.js");
 const sessionId = wx.getStorageSync('sessionId');
+const log = require('../../../../utils/log.js');
+const userName = wx.getStorageSync('userName');
 
 Page({
   data:{
@@ -42,7 +44,9 @@ Page({
     })
     
     var url = '' == dt['attributeId'] ? 'executivesLog/djxmZs/com.md.djxmZs.apppropertiesinfobiz.addAppPropertiesInfo.biz.ext' : 'executivesLog/djxmZs/com.md.djxmZs.apppropertiesinfobiz.updateAppPropertiesInfo.biz.ext';
-    
+
+    log.info('录入员：' + userName + '，信息：【' + dt + '】，时间：' + common.formatTime(new Date()));
+
     //提交
 		common.httpPost(url, {
       apppropertiesinfo: dt,
@@ -90,8 +94,11 @@ Page({
     
   },
   onUnload:function(){
+    let attributeId = this.data.attributeId;
+    let url = (null == attributeId || '' == attributeId) ? '' : '../../';
+    
     wx.reLaunch({
-      url: '../attribute/pages/attributeList/attributeList'
+      url: url + '../attribute/pages/attributeList/attributeList'
     })
   }
 })

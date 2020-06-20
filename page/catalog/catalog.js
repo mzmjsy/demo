@@ -11,11 +11,7 @@ Page({
   },
 
   onLoad: function(options) {
-    this.setData({
-      admin: admin,
-      check: check,
-      repair: repair
-    })
+
   },
 
   getScancode: function(event) {
@@ -28,19 +24,18 @@ Page({
         if (4 == result.split("@").length) {
           var data = '?equipmentCode='+result.split("@")[1]+'&equipmentName='+result.split("@")[2]+'&attributeType='+result.split("@")[3];
         
-          switch(type) {
-            case 'attribute':
-              wx.navigateTo({
-                url: '../attribute/pages/attributeAdd/attributeAdd'+data
-              });
-            case 'check':
-              wx.navigateTo({
-                url: '../check/pages/checkAdd/checkAdd'+data
-              });
-            case 'repair':
-              wx.navigateTo({
-                url: '../check/pages/checkList/checkList'+data
-              });
+          if ('attribute' == type) {
+            wx.navigateTo({
+              url: '../attribute/pages/attributeAdd/attributeAdd'+data
+            });
+          } else if ('check' == type) {
+            wx.navigateTo({
+              url: '../check/pages/checkAdd/checkAdd'+data
+            });
+          } else if ('repair' == type) {
+            wx.navigateTo({
+              url: '../check/pages/checkList/checkList'+data
+            });
           }
         } else {
           wx.showModal({

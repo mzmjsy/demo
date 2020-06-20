@@ -14,7 +14,7 @@ page{
  .td {
    border: 0px solid #dadada;
    text-align: left;
-   margin-left: -50rpx;
+   margin-left: -150rpx;
    /* width:80%; */
  }
 
