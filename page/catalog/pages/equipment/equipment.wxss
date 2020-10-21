@@ -1,0 +1,153 @@
+/* pages/myOrder/myOrder.wxss */
+.nearCard-fl {
+  width: 10%;
+  float: left;
+}
+
+.nearCard-fl image {
+  width: 170rpx;
+  height: 130rpx;
+  padding: 17% 15%;
+}
+
+.row-first {
+  color: orange;
+}
+
+.mine {
+  width: 30rpx;
+  height: 30rpx;
+  padding: 2% 2%;
+  white-space: nowrap;
+}
+
+.mine1 {
+  width: 40rpx;
+  height: 40rpx;
+  padding: 2% 2%;
+  white-space: nowrap;
+  float: left;
+  margin: -60rpx 0rpx 0rpx 380rpx;
+}
+
+.line {
+  width: 90%;
+  height: 2rpx;
+  background: #aaa;
+  margin: 5px 0.5px 0.5px 12px
+}
+
+.ml31 {
+  float: left;
+  margin: -37rpx 0rpx 0rpx 40rpx;
+}
+
+.ml32 {
+  float: left;
+  margin: -44rpx 0rpx 0rpx 50rpx;
+}
+
+.nearCard-fr {
+  font-size: 30rpx;
+  line-height: 50rpx;
+  width: 64%;
+  margin: 15rpx 0rpx 0rpx 30%;
+  color: #999;
+}
+
+.nearCard-fr text {
+  font-size: 25rpx;
+}
+
+.down {
+  background-color: #efefef;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20rpx;
+}
+
+.down view {
+  font-size: 26rpx;
+  color: #999;
+  line-height: 50rpx;
+}
+
+.feedBack {
+  text-align: center;
+  background-color: #eecfbd;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10rpx;
+  padding: 5rpx 0;
+  margin: 10rpx 0 0 0;
+}
+
+.c-detail {
+  float: right;
+  padding: 2rpx 10rpx 2rpx 10rpx;
+  background-color: royalblue;
+  color: white;
+  border-radius: 5px;
+  margin-top: 3px;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+
+	to {
+		opacity: 1
+	}
+}
+
+.fadeIn {
+	animation-name: fadeIn;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1
+	}
+
+	to {
+		opacity: 0
+	}
+}
+
+.fadeOut {
+	animation-name: fadeOut;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+.search-bar {
+  position: relative;
+  width: 94%;
+  margin: 0 auto;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  background-color: #fff;
+  margin-top: 10rpx;
+  border: 1px solid darkgray;
+}
+
+.search-bar .input {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.search-bar input {
+  margin-left: 65rpx; 
+  font-size: 30rpx;
+  height: 60rpx
+}
+
+.search-bar image {
+  position: absolute;
+  left: 3%;
+  top: 13rpx;
+  width: 30rpx;
+  height: 34rpx;
+}

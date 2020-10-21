@@ -1,3 +1,47 @@
-<view style='padding : 10rpx;'>
-  <etable config="{{config}}"></etable>
-</view>
+<form class="page" bindsubmit="bindSearchData" hidden="{{'attribute' == config.type ? true : false}}">
+  <view class="picker_group">
+    <input hidden="true" name="type" value="{{config.type}}" />
+    <input hidden="true" name="equipmentCode" value="{{config.equipmentCode}}" />
+    <picker mode="date" value="{{date}}" end="{{date2}}" bindchange="bindDateChange">  
+      <view class="picker">  
+        {{date}}
+      </view>  
+    </picker>  
+    至  
+    <picker mode="date" value="{{date2}}" start="{{date}}" end="2050-01-01" bindchange="bindDateChange2">  
+      <view class="picker">  
+        {{date2}}
+      </view>  
+    </picker>
+    <button type="default" class="search" size="mini" form-type="submit">  
+      查询
+    </button>
+  </view>
+</form>
+<scroll-view class='container' scroll-top="{{scrollTop}}" scroll-y style="height: {{scrollHeight}}px" scroll-with-animation bindscroll="scroll">
+  <block wx:for-items="{{details}}">
+    <view class='card b-shadow {{"Y" == item.isFault && "Y" != item.isRepair ? "warning" : ""}}' id="{{item.checkId}}" bindtap="getDetail" data-name='{{item.checkId}}@@{{item.isFault}}@@{{item.isRepair}}'>
+      <view class='nearCard-fr'>
+        <view class="row-first">点检部位：
+          <text class='c-green'>{{item.attributeType}}</text>
+        </view>
+        <view>点检内容：
+          <text class='c-green'>{{item.attributeName}}</text>
+        </view>
+        <view>点检标准：
+          <text class='c-green'>{{item.equipmentStandard}}</text>
+        </view>
+        <view>点检时间：
+          <text class='c-green'>{{item.checkDate}}</text>
+        </view>
+        <view>点检结果：
+          <text class='c-green'>{{'N' == item.checkResult ? '无异常' : ('Y' == item.checkResult ? '有异常' : item.checkResult)}}</text>
+        </view>
+        <view>是否有故障：
+          <text class='c-green'>{{'N' == item.isFault ? '无故障' : '有故障'}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<image src="../../../../img/top.png" style="width: 40px; height: 40px; position: fixed; right: 40px; bottom: 40px;" bindtap="goTop" wx:if="{{visual}}" class="{{animation}}" />

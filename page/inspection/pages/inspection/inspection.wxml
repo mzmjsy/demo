@@ -1,0 +1,52 @@
+<form bindsubmit="formSubmit">
+  <view class="hidden">
+    <input name="inspectionInfoId" value="{{inspectionInfoId}}" />
+  </view>
+  <view class="mod-a mt20">
+    <view class="mod t-sign-time">
+      <text class="key">客户</text>
+      <input class="input" name="customerShortName" bindtap="{{'' == inspectionInfoId ? 'toCustomer' : ''}}" value="{{customerShortName}}" disabled="true" />
+      <image class="arrow-r" src='../../../../img/enter-icon.png'></image>
+    </view>
+    <view class="mod t-sign-time order">
+      <text class="key">订单号</text>
+      <textarea name="orderNum" value="{{orderNum}}" maxlength='2000' disabled="true" bindtap="{{'' == inspectionInfoId ? 'toOrder' : ''}}" />
+      <image class="arrow-r" src='../../../../img/enter-icon.png'></image>
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">接待人员</text>
+      <input class="input" name="inspectionName" value="{{inspectionName}}" disabled="true" />
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">业务员</text>
+      <input class="input" name="saleName" value="{{saleName}}" disabled="true" />
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">跟单员</text>
+      <input class="input" name="empName" value="{{empName}}" disabled="true" />
+    </view>
+    <view class="mod t-sign-time">
+      <text>验货日期</text>
+      <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+        <view class="date">
+          {{date}}<image class="arrow-d" src="../../../../img/arrow-d-0.png"></image>
+        </view>
+      </picker>
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">验货结论</text>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <radio value="0" checked="{{0 == inspectionResult ? true : false}}" />合格
+        <radio value="1" checked="{{1 == inspectionResult ? true : false}}" />不合格
+        <radio value="2" checked="{{2 == inspectionResult ? true : false}}" />待定
+      </radio-group>
+    </view>
+    <view class="mod t-sign-time order">
+      <text class="key">备注</text>
+      <textarea name="remark" value="{{remark}}" maxlength='2000' />
+    </view>
+  </view>
+  <view class="create">
+    <button formType="submit" hover-class='none' class='btn'>保存</button>
+  </view>
+</form>

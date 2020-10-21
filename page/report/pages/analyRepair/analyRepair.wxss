@@ -1,0 +1,5 @@
+.graphCanvas {
+  width: 750rpx;
+  height: 300px;
+  margin-top: 30px;
+}

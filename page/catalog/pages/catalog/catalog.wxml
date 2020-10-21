@@ -1,0 +1,74 @@
+<view class='nav'>
+    <view class='conlumn'>
+        <navigator url="/page/catalog/pages/factory/factory?title=attribute" hover-class='navigator-hover'>
+            <image src='../../../../img/repair-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <image src='../../../../img/shebei1.png'></image>
+                    <view>设备信息显示</view>
+                </view>
+            </image>
+        </navigator>
+        <navigator url='/' hover-class='none'>
+            <image src='../../../../img/check-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getScancode' data-index="attribute">
+                    <image src='../../../../img/shebei2.png'></image>
+                    <view>录入设备属性</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url="/" hover-class='none'>
+            <image src='../../../../img/shop-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getScancode' data-index="check">
+                    <image src='../../../../img/shebei3.png'></image>
+                    <view>录入点检结果</view>
+                </view>
+            </image>
+        </navigator>
+        <navigator url='/page/catalog/pages/factory/factory?title=check' hover-class='navigator-hover'>
+            <image src='../../../../img/activity-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <image src='../../../../img/shebei4.png'></image>
+                    <view>查看点检信息</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='/page/catalog/pages/factory/factory?title=scan' hover-class='none'>
+            <image src='../../../../img/home-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <image src='../../../../img/shebei5.png'></image>
+                    <view>录入维修信息</view>
+                </view>
+            </image>
+        </navigator>
+        <navigator url='/page/catalog/pages/factory/factory?title=repair' hover-class='navigator-hover'>
+            <image src='../../../../img/online-bg.png' class='nav-pic'>
+                <view class='icon-wrap' bindtap='getRepairList' data-index="repairList">
+                    <image src='../../../../img/shebei1.png'></image>
+                    <view>查看维修情况</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='/page/catalog/pages/factory/factory?title=analyCheck' hover-class='navigator-hover'>
+            <image src='../../../../img/activity-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <image src='../../../../img/shebei4.png'></image>
+                    <view>巡检任务分析</view>
+                </view>
+            </image>
+        </navigator>
+        <navigator url="/page/report/pages/analyRepair/analyRepair" hover-class='navigator-hover'>
+            <image src='../../../../img/shop-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <image src='../../../../img/shebei3.png'></image>
+                    <view>维修频率统计</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+</view>

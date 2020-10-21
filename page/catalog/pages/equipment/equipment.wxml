@@ -1,0 +1,43 @@
+<view class='search-bar'>
+  <input type='text' placeholder='输入设备编码' placeholder-class='input' confirm-type='search' bindconfirm='keywords'></input>
+  <image src='../../../../img/search-icon.png'></image>
+</view>
+<scroll-view class='container' scroll-top="{{scrollTop}}" scroll-y style="height: {{scrollHeight}}px" scroll-with-animation bindscroll="scroll">
+  <block wx:for-items="{{listData}}">
+    <view class='card b-shadow' bindtap='toggleBtn' id="{{item.attributeId}}">
+      <view class='nearCard-fl'>
+        <image src='{{imgUrl}}'></image>
+      </view>
+      <view class='nearCard-fr'>
+        <view class="row-first">设备编码：
+          <text class='c-green'>{{item.equipmentCode}}</text>
+          <view class='c-detail' bindtap='getDetail' data-name='{{item.equipmentCode}}'>查看明细</view>
+        </view>
+        <view>设备名称：
+          <text class='c-green'>{{item.equipmentName}}</text>
+        </view>
+        <!-- <view>点检部位：
+          <text class='c-green'>{{item.attributeType}}</text>
+        </view> -->
+        <view>所属厂区：
+          <text class='c-green'>{{item.attribute1}}</text>
+        </view>
+      </view>
+      <view class='down clearfix {{uhide==item.attributeId?"":"hidden"}}'>
+        <view class='ml30'>规格型号：{{item.attribute2}}</view>
+        <view class='ml30'>生产厂家：{{item.attribute3}}</view>
+        <view class='ml30'>出厂编号：{{item.attribute4}}</view>
+        <view class="line"></view>
+        <view class='mine'>
+          <image src='../../../../img/mine.png'></image>
+          <text class='ml31'>负责人：{{item.attribute6}}</text>
+        </view>
+        <view class='mine1'>
+          <image src='../../../../img/calendar.png'></image>
+          <text class='ml32'>出厂时间：{{item.attribute5}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<image src="../../../../img/top.png" style="width: 40px; height: 40px; position: fixed; right: 40px; bottom: 40px;"  bindtap="goTop" wx:if="{{visual}}" class="{{animation}}" />

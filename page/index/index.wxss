@@ -1,9 +1,12 @@
 page{
   background: #f9f9f9;
 }
+swiper {
+  height: 500rpx
+}
 .slide-image{
   width: 96%;
-  margin-left: 6px;
+  margin: 10px 0px 0px 6px;
 }
 .font {
   text-indent: 80rpx;

@@ -7,7 +7,7 @@
                 </view>
                 <view class="weui-cell__bd">
                     <input hidden="true" class="weui-input" name="checkId" value="{{checkEntry.checkId}}" />
-                    <input class="weui-input" name="equipmentCode" value="{{checkEntry.attribute2}}" disabled="true" />
+                    <input class="weui-input" name="attribute2" value="{{checkEntry.attribute2}}" disabled="true" />
                 </view>
             </view>
 
@@ -31,10 +31,19 @@
 
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
+                    <view class="weui-label">点检内容:</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="attributeName" value="{{checkEntry.attributeName}}" disabled="true" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
                     <view class="weui-label">点检结果:</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" name="checkResult" value="{{checkEntry.checkResult}}" disabled="true" />
+                    <input class="weui-input" name="checkResult" value="{{'Y' == checkEntry.checkResult ? '是' : ('N' == checkEntry.checkResult ? '否' : checkEntry.checkResult)}}" disabled="true" />
                 </view>
             </view>
 

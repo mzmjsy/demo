@@ -5,37 +5,24 @@ const userName = wx.getStorageSync('userName');
 
 Page({
   data:{
-    attributeId: '',
-    equipmentCode: '',
-    equipmentName: '',
-		attributeType: '',
-		attributeName: '',
-    equipmentStandard: '',
-    inputType: '',
-		options: [{
-      id: 'text',
-      name: '文字输入'
-    }, {
-      id: 'radio',
-      name: '单项选择'
-    }, {
-      id: 'number',
-      name: '数字输入'
-    }],
-    selected: {}
+    equipment: [],
+    inputType: 'radio'
   },
+
   onLoad:function(options){
-    var equipment = null == options.equipment ? '' : JSON.parse(options.equipment);
     this.setData({
-      attributeId: '' != equipment ? equipment['attributeId'] : '',
-      equipmentCode: 'null' == options.equipmentCode ? equipment['equipmentCode'] : options.equipmentCode,
-      equipmentName: 'null' == options.equipmentName ? equipment['equipmentName'] : options.equipmentName,
-			attributeType: 'null' == options.attributeType ? equipment['attributeType'] : options.attributeType,
-			attributeName: '' != equipment ? equipment['attributeName'] : '',
-      equipmentStandard: '' != equipment ? equipment['equipmentStandard'] : '',
-      inputType: '' != equipment ? equipment['inputType'] : '',
+      equipment: JSON.parse(options.equipment)
     })
   },
+
+  //输入方式
+  radioChange: function(e) {
+    var that = this;
+    that.setData({
+      inputType: e.detail.value
+    })
+  },
+
   addAttribute:function(dt){
 		var that = this;
     wx.showLoading({
@@ -46,7 +33,7 @@ Page({
     var url = '' == dt['attributeId'] ? 'executivesLog/djxmZs/com.md.djxmZs.apppropertiesinfobiz.addAppPropertiesInfo.biz.ext' : 'executivesLog/djxmZs/com.md.djxmZs.apppropertiesinfobiz.updateAppPropertiesInfo.biz.ext';
 
     log.info('录入员：' + userName + '，信息：【' + dt + '】，时间：' + common.formatTime(new Date()));
-
+    dt.inputType = that.data.inputType;
     //提交
 		common.httpPost(url, {
       apppropertiesinfo: dt,
@@ -56,10 +43,13 @@ Page({
 				wx.showToast({
 					title: '保存成功',
 					icon: 'success',
-				})
+        })
+
+        var obj = that.data.equipment;
+        obj.attributeName = '';
+        obj.equipmentStandard = '';
 				that.setData({
-					attributeName: '',
-					equipmentStandard: ''
+					equipment: obj
 				})
 			} else {
 				wx.showModal({
@@ -69,6 +59,7 @@ Page({
 			}
 		});
   },
+  
 	formSubmit: function(e) {
 		let that = this;
     let attributeName = e.detail.value.attributeName;
@@ -94,11 +85,6 @@ Page({
     
   },
   onUnload:function(){
-    let attributeId = this.data.attributeId;
-    let url = (null == attributeId || '' == attributeId) ? '' : '../../';
-    
-    wx.reLaunch({
-      url: url + '../attribute/pages/attributeList/attributeList'
-    })
+
   }
 })

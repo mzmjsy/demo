@@ -5,13 +5,14 @@ Page({
   data: {
     config:{
       content: [],
-      titles: ['点检内容', '维修情况', '维修时间'],
-      props : ['attributeName', 'repairDesc', 'repairDate'],
-      columnWidths: ['250rpx', '300rpx','180rpx'],
-      hides: ['block','block','block'],
+      titles: ['点检ID', '点检部位内容', '维修情况', '维修时间', '是否故障', '是否维修'],
+      props : ['checkID', 'attributeName', 'repairDesc', 'repairDate', 'isFault', 'isRepair'],
+      columnWidths: ['0rpx', '250rpx', '300rpx','180rpx', '0rpx', '0rpx'],
+      hides: ['none', 'block','block','block', 'none', 'none'],
       border: true,
       stripe: true,
       type: 'repair',
+      equipmentCode: '',
       headbgcolor: 'gray'
     }
   },
@@ -22,13 +23,14 @@ Page({
   onLoad: function (options) {
     // 此处模拟网络请求
     this.setData({
-      'config.content': []
+      'config.content': [],
+      'config.equipmentCode': options.equipmentCode
     })
-    this.getRepair();
+    this.getRepair(options.equipmentCode);
   },
 
 	//获取故障设备维修情况
-	getRepair: function () {
+	getRepair: function (equipmentCode) {
 		var that = this;
 		wx.showLoading({
 			title: '数据正在请求中',
@@ -37,12 +39,22 @@ Page({
     var that = this;
 		var criteria = new Object();
     criteria._entity = 'com.md.djxmZs.djxmZs.AppCheckRepairV';
+
     var expr = new Array();
-    var expr1 = new Object();
-    expr1.isFault = 'Y';
-    expr1._op = "=";
-    expr.push(expr1);
+    var expr2 = new Object();
+    expr2.equipmentCode = equipmentCode;
+    expr2._op = "=";
+    expr.push(expr2);
+    var expr3 = new Object();
+    expr3.repairDate = common.formatDate(new Date()) + ' 00:00:00';
+    expr3._op = ">=";
+    expr.push(expr3);
+    var expr4 = new Object();
+    expr4.repairDate = common.formatDate(new Date()) + ' 23:59:59';
+    expr4._op = "<=";
+    expr.push(expr4);
     criteria._expr = expr;
+
 		var orderby = new Object();
 		var orderbyArr = new Array();
 		orderby._sort = "desc";
@@ -92,9 +104,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    wx.reLaunch({
-      url: '../catalog/catalog'
-    })
+
   },
 
   /**

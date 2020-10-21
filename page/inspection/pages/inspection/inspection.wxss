@@ -1,0 +1,171 @@
+.mt20{
+  margin-top: 20rpx;
+}
+
+.add-page{
+  display: flex;
+  flex-direction: column;
+  font-size: 32rpx;
+  color: #676767;
+  padding: 30rpx 0;
+}
+
+.mod-a{
+  padding: 0 10rpx;
+  border: 1px solid #f0f0f0;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 5px 5px 10px 5px;
+  font-size: 32rpx;
+}
+
+.mod{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 110rpx;
+  padding: 0 20rpx;
+}
+
+.arrow-r{
+  width: 20rpx;
+  height: 28rpx;
+  margin-left: 20rpx;
+}
+.arrow-d{
+  width: 17rpx;
+  height: 9rpx;
+  margin-left: 10rpx;
+}
+
+.value{
+  color: #b2b2b2;
+}
+.t-sign-time .value{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.t-early .value{
+  padding-right: 20rpx;
+}
+.t-name .input, .t-address .value{
+  text-align: right;
+  width: 510rpx;
+  overflow: hidden;
+  color: #b2b2b2;
+  height: 60rpx;
+}
+
+.input {
+  text-align: right;
+  width: 215px;
+}
+
+.t-address, .t-sign-time, .t-time{
+  border-bottom: 3px solid #f0f0f0;
+}
+
+.t-time{
+  justify-content:space-around;
+}
+.start, .end{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.pipe{
+  height: 48rpx;
+  border-left: 1px solid #f0f0f0;
+}
+.date{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10rpx;
+  color: #2fcc85;
+}
+.week{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
+}
+.week .d{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background-color: #b2b2b2;
+  text-align: center;
+  color: #fff;
+  margin: 0 15rpx;
+}
+.week .on{
+  background-color: #2fcc85;
+}
+.create{
+  margin-top: 80rpx;
+  padding: 0 26rpx;
+}
+.create .btn{
+  height: 80rpx;
+  line-height: 45rpx;
+  background-color: #2fcc85;
+  color: #fff;
+  margin-bottom: 30px;
+}
+.create .button-hover{
+  background-color: #2caf6d;
+  color: #aadfc4;
+}
+
+.create .disabled{
+  opacity: 0.4
+}
+
+radio {
+  transform: scale(0.7);
+}
+
+.top {
+  background-color: lightslategrey;
+}
+
+checkbox-group {
+  height: 130rpx;
+}
+
+.checkbox {
+  margin-top: 40rpx;
+  transform: scale(0.9);
+}
+
+.agreement-box checkbox .wx-checkbox-input {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.agreement-box checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: green;
+}
+
+.agreement-box checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  font-size: 40rpx;
+  color: #ffffff;
+}
+
+textarea {
+  width: 75%;
+  margin: 0px 0px 0px 8px;
+  border-radius: 5px;
+  background: #def0effd;
+  height: 180px;
+}
+
+.order {
+  height: 200px;
+}

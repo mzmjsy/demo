@@ -1,3 +1,42 @@
-<view style='padding : 10rpx;'>
-  <etable config="{{config}}"></etable>
-</view>
+<scroll-view class='container' scroll-top="{{scrollTop}}" scroll-y style="height: {{scrollHeight}}px" scroll-with-animation bindscroll="scroll">
+  <block wx:for-items="{{attributeList}}">
+    <view class="weui-cells" bindtap="edit" data-name="{{item}}">
+      <view class="weui-cell">
+        <view class="weui-cell_hd">
+          <view class="weui-label">点检部位</view>
+        </view>
+        <view class="weui-cell_bd">
+          {{item.attributeType}}
+        </view>
+      </view>
+
+      <view class="weui-cell">
+        <view class="weui-cell_hd">
+          <view class="weui-label">点检内容</view>
+        </view>
+        <view class="weui-cell_bd">
+          {{item.attributeName}}
+        </view>
+      </view>
+
+      <view class="weui-cell">
+        <view class="weui-cell_hd">
+          <view class="weui-label">点检标准</view>
+        </view>
+        <view class="weui-cell_bd">
+          {{null == item.equipmentStandard ? '' : item.equipmentStandard}}
+        </view>
+      </view>
+
+      <view class="weui-cell">
+        <view class="weui-cell_hd">
+          <view class="weui-label">输入方式</view>
+        </view>
+        <view class="weui-cell_bd">
+          {{'text' == item.inputType ? '文本' : ('number' == item.inputType ? '数字' : '选择')}}
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<image src="../../../../img/top.png" style="width: 40px; height: 40px; position: fixed; right: 40px; bottom: 40px;"  bindtap="goTop" wx:if="{{visual}}" class="{{animation}}" />

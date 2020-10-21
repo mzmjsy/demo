@@ -75,7 +75,8 @@ App({
   },
 
   globalData: {
-    wxUrl: 'https://www.vapp.meide-casting.com/mdapp/'
-    //wxUrl: 'http://10.10.5.132:8080/vapp/'
+    wxUrl: 'https://www.vapp.meide-casting.com/mdapp/',
+    imsUrl: 'https://www.vapp.meide-casting.com/ims/'
+    // imsUrl: 'http://10.10.5.102:8080/md-uat/'
   }
 })

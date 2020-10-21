@@ -1,0 +1,65 @@
+<view class='nav'>
+    <view class='conlumn'>
+        <navigator url="{{action}}&factory=制造厂" hover-class='navigator-hover'>
+            <image src='../../../../img/repair-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <view>制造厂</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url="{{action}}&factory=成型厂" hover-class='none'>
+            <image src='../../../../img/check-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <view>成型厂</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='{{action}}&factory=动力厂' hover-class='none'>
+            <image src='../../../../img/shop-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <view>动力厂</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='{{action}}&factory=发电厂' hover-class='none'>
+            <image src='../../../../img/home-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <view>发电厂</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='{{action}}&factory=烧结厂' hover-class='none'>
+            <image src='../../../../img/activity-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <view>烧结厂</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='{{action}}&factory=球团厂' hover-class='none'>
+            <image src='../../../../img/online-bg.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <view>球团厂</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+    <view class='conlumn'>
+        <navigator url='{{action}}&factory=新型材料厂' hover-class='none'>
+            <image src='../../../../img/color1.png' class='nav-pic'>
+                <view class='icon-wrap'>
+                    <view>新型材料厂</view>
+                </view>
+            </image>
+        </navigator>
+    </view>
+</view>

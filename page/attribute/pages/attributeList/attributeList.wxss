@@ -1,0 +1,45 @@
+.weui-cells {
+  margin: 20rpx 0rpx 0rpx 20rpx;
+  width: 95%;
+  background-color: var(--weui-BG-2);
+  border-radius: 10px;
+}
+
+.weui-label {
+  font-weight: bold;
+  font-family: Microsoft Yahei;
+  color: #999;
+}
+
+.weui-cell {
+  padding: 10rpx;
+  font-size: 32rpx;
+}
+
+.weui-cell_bd {
+  color: #999;
+}
+
+.weui-button {
+  width: 90%;
+}
+
+.edit {
+  float: left;
+}
+
+.delete {
+  float: left;
+}
+
+.fadeIn {
+	animation-name: fadeIn;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+.fadeOut {
+	animation-name: fadeOut;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}

@@ -1,0 +1,29 @@
+<view class='search-bar'>
+  <input type='text' placeholder='请输入客户简称' placeholder-class='input' confirm-type='search' bindconfirm='keywords'></input>
+  <image src='../../../../img/search-icon.png'></image>
+</view>
+<scroll-view class='container' scroll-top="{{scrollTop}}" scroll-y style="height: {{scrollHeight}}px" scroll-with-animation bindscroll="scroll">
+  <block wx:for-items="{{crmCtmCustomers}}">
+    <view class='card b-shadow' id="{{item.customerId}}" data-name='{{item.customerId}}'>
+      <view class='nearCard-fr'>
+        <radio-group class="radio" bindchange="radioChange">
+          <radio value='{{item.customerId}}' bindtap='radio' data-customer="{{item.customerId}}@@{{item.customerShortName}}"  checked="{{item.customerId == customerId}}"/>
+        </radio-group>
+        <view class="row-first">客户ID：
+          <text class='c-green'>{{item.customerId}}</text>
+        </view>
+        <view>客户编码：
+          <text class='c-green'>{{item.customerCode}}</text>
+        </view>
+        <view>客户名称：
+          <text class='c-green'>{{item.customerName}}</text>
+        </view>
+        <view>客户简称：
+          <text class='c-green'>{{item.customerShortName}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<image class='img' src='../../../../img/enter.jpg' bindtap='enter'></image>
+<image src="../../../../img/top.png" style="width: 40px; height: 40px; position: fixed; right: 40px; bottom: 40px;" bindtap="goTop" wx:if="{{visual}}" class="{{animation}}" />

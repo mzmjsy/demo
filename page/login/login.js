@@ -10,14 +10,12 @@ Page({
     repair: ''
   },
   onLoad:function(options){
-    console.log(wx.getStorageSync('userName'));
     this.setData({
       userName: wx.getStorageSync('userName'),
       userPassword: wx.getStorageSync('passWord')
     })
   },
   login:function(params){
-    var that = this;
     wx.showLoading({
       title: '登录中'
     })
@@ -31,11 +29,19 @@ Page({
 			mpUser: mpUser
 		}, function (data) {
       var retCode = data.retCode;
+      var roleIds = '';
+      var url = '../catalog/pages/catalog/catalog';
+
 			if ("0" == retCode) {
         wx.setStorageSync('sessionId', data.date.sessionId);
 
+        if (data.roles.length > 0) {
+          wx.setStorageSync('name', data.roles[0]['userName']);
+        }
+
         for (var i in data.roles) {
           var roleId = data.roles[i]['roleId'];
+          roleIds = roleIds + roleId + ',';
 
           if (581 == roleId) {
             wx.setStorageSync('admin', 581);
@@ -49,16 +55,23 @@ Page({
             wx.setStorageSync('repair', 583);
           }
         }
+        roleIds = roleIds.substr(0,roleIds.length - 1);
+
         log.info('登录用户名：' + params.userName + '登录权限：【' + wx.getStorageSync('admin') + '，' + wx.getStorageSync('check') + '，' + wx.getStorageSync('repair') + '】' + '，登录时间：' + common.formatTime(new Date()));
-				wx.showToast({
-					title: '登录成功',
+
+        if (roleIds.indexOf(601) >= 0) {
+          url = '../inspection/pages/mulu/mulu';
+        }
+
+        wx.showToast({
+          title: '登录成功',
           icon: 'success',
           success () {
             wx.reLaunch({
-              url: '../catalog/catalog',
+              url: url,
             })
           }
-				})
+        })
 			} else {
 				wx.showModal({
 					title: '-1' == retCode ? '用户名不存在' : '密码错误',

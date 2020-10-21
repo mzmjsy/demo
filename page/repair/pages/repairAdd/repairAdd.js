@@ -18,7 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-		var that = this;
 		var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     this.setData({
       checkEntry: [],
@@ -59,7 +58,6 @@ Page({
 			appcheckentry: criteria,
 			sessionId: sessionId
 		}, function (data) {
-			console.log(data);
 			wx.hideLoading();
 			that.setData({
 				checkEntry: data.appcheckentry
@@ -71,6 +69,17 @@ Page({
 	formSubmit: function (e) {
 		var that = this;
 		var data = e.detail.value;
+		
+		if (null == userName || '' == userName) {
+			wx.showModal({
+				title: '提示',
+				content: '用户名缓存失效，请重新登录',
+				showCancel: false
+			})
+
+			return;
+		}
+
     let repairDesc = data.repairDesc;
     if(repairDesc == '' ){
 			wx.showToast({
@@ -87,7 +96,10 @@ Page({
 		data.isRepair = 'Y';
 		data.repairOperator = userName;
 
-		log.info('维修员：' + userName + '信息：【' + data + '】，时间：' + common.formatTime(new Date()));
+		var str = '【设备编码：' + data.equipmentCode + '，点检部位：' + data.attributeType
+						+ '，点检内容：' + data.attributeName + '，点检结果：' + data.checkResult 
+						+ '，维修情况：' + repairDesc;
+		log.info('维修员：' + userName + '信息：【' + str + '】，时间：' + data.attribute1);
 
     //提交
 		common.httpPost('executivesLog/djxmZs/com.md.djxmZs.apprepairentrybiz.addAppRepairEntry.biz.ext', {
@@ -106,7 +118,7 @@ Page({
 			} else {
 				wx.showModal({
 					title: '保存失败',
-					image: '../../../../img/fail.jpg'
+					icon: 'none'
 				})
 			}
 		});
@@ -136,9 +148,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-		wx.reLaunch({
-      url: '/page/check/pages/checkList/checkList'
-    })
+		// wx.reLaunch({
+    //   url: '/page/check/pages/checkList/checkList'
+    // })
   },
 
   /**

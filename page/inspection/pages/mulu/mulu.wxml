@@ -1,0 +1,20 @@
+<view class='nav'>
+  <view class='conlumn'>
+    <navigator url="/page/inspection/pages/inspectionList/inspectionList" hover-class='navigator-hover'>
+      <image src='../../../../img/repair-bg.png' class='nav-pic'>
+        <view class='icon-wrap'>
+          <view>验货列表</view>
+        </view>
+      </image>
+    </navigator>
+  </view>
+  <view class='conlumn'>
+    <navigator url="/page/inspection/pages/inspection/inspection?flag=N" hover-class='none'>
+      <image src='../../../../img/check-bg.png' class='nav-pic'>
+        <view class='icon-wrap'>
+          <view>产品验货</view>
+        </view>
+      </image>
+    </navigator>
+  </view>
+</view>

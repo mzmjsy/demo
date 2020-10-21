@@ -1,73 +1,50 @@
-<view class="page__bd page__bd_spacing">
-    <form bindsubmit="formSubmit">
-        <view class="hidden">
-            <input class="weui-input" name="attributeId" value="{{attributeId}}" />
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">设备编码:</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入设备编码" name="equipmentCode" value="{{equipmentCode}}" disabled="true" />
-                </view>
-            </view>
-
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">设备名称:</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="设备名称" name="equipmentName" value="{{equipmentName}}" disabled="true" />
-                </view>
-            </view>
-
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">点检部位:</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入点检部位" name="attributeType" value="{{attributeType}}" disabled="true" />
-                </view>
-            </view>
-
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">点检内容:</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入点检内容" name="attributeName" value="{{attributeName}}" />
-                </view>
-            </view>
-
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">点检标准:</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入点检标准" name="equipmentStandard" value="{{equipmentStandard}}" />
-                </view>
-            </view>
-
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">输入类型:</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <radio-group class="radio-group" name="inputType">
-                        <label>
-                            <radio value="text" checked="{{'text' == inputType ? 'checked' : ''}}" />文字输入
-                        </label>
-                        <label>
-                            <radio value="radio" checked="{{('radio' == inputType || '' == inputType) ? 'checked' : ''}}" />单项选择
-                        </label>
-                        <label>
-                            <radio value="number" checked="{{'number' == inputType ? 'checked' : ''}}" />数字输入
-                        </label>
-                    </radio-group>
-                </view>
-            </view>
-        </view>
-        <button class="add-btn" form-type="submit" hover-class="none">保存</button>
-    </form>
-</view>
+<form bindsubmit="formSubmit">
+  <view class="hidden">
+    <input name="attributeId" value="{{equipment.attributeId}}" />
+    <input name="attribute2" value="{{equipment.attribute2}}" />
+    <input name="attribute3" value="{{equipment.attribute3}}" />
+    <input name="attribute4" value="{{equipment.attribute4}}" />
+    <input name="attribute5" value="{{equipment.attribute5}}" />
+  </view>
+  <view class="mod-a mt20">
+    <view class="mod t-sign-time">
+      <text class="key">所属厂区</text>
+      <input class="input" name="attribute1" value="{{equipment.attribute1}}" disabled="true" />
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">设备编码</text>
+      <input class="input" name="equipmentCode" value="{{equipment.equipmentCode}}" disabled="true" />
+    </view>
+    <view class="section t-sign-time">
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">设备名称</text>
+      <input class="input" name="equipmentName" value="{{equipment.equipmentName}}" disabled="true" />
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">点检部位</text>
+      <input class="input" name="attributeType" value="{{equipment.attributeType}}" disabled="true" />
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">点检内容</text>
+      <input class="input" name="attributeName" placeholder="请输入点检内容" value="{{equipment.attributeName}}" />
+      <image class="arrow-r" src="../../../../img/arrow-r-0.png"></image>
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">点检标准</text>
+      <input class="input" name="equipmentStandard" placeholder="请输入点检标准" value="{{equipment.equipmentStandard}}" />
+      <image class="arrow-r" src="../../../../img/arrow-r-0.png"></image>
+    </view>
+    <view class="mod t-sign-time">
+      <text>输入方式</text>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <radio value="text" checked="" />文本
+        <radio value="radio" checked="checked" />选择
+        <radio value="number" checked="" />数字
+      </radio-group>
+    </view>
+  </view>
+  <view class="create">
+    <button formType="submit" hover-class='none' class='btn'>保存</button>
+  </view>
+</form>

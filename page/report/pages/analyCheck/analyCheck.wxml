@@ -1,0 +1,3 @@
+<canvas class="graphCanvas" canvas-id="pieGraph"></canvas>
+
+<canvas class="graphCanvas" canvas-id="columnGraph"></canvas>

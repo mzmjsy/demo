@@ -1,51 +1,88 @@
 <form bindsubmit="formSubmit">
-	<view class="table">
-		<view class="tr">
-			<view class="th">编码：</view>
-			<view class="td">
-				<input type='text' name='equipmentCode' value="{{equipmentCode}}" disabled="true" />
-			</view>
-			<view class="th">名称：</view>
-			<view class="td">
-				<input type='text' name='equipmentName' value="{{equipmentName}}" disabled="true" />
-			</view>
-			<view class="th">部位：</view>
-			<view class="td">
-				<input type='text' name='attributeType' value="{{attributeType}}" disabled="true" />
-			</view>
-		</view>
-		<view class='row1' wx:if='{{attributes.length > 0}}' wx:for='{{attributes}}' wx:key='{{item.attributeId}}'>
-			<input hidden="true" name="{{'attributeName' + item.attributeId}}" value="{{item.attributeName}}" />
-			<text class='text' data-name='{{item.attributeName}}'>{{item.attributeName}}</text>
-			<view class='column2-wrapper'>
-				<radio-group name="{{'atrributes' + item.attributeId}}" wx:if="{{'radio' == item.inputType}}">
-					<radio value="Y" checked="" />是
-					<radio value="N" checked="checked" />否
-				</radio-group>
-				<view class="column-value" wx:if="{{'text' == item.inputType}}">
-					<input class="input" name="{{'atrributes' + item.attributeId}}" placeholder="请输入点检结果" value="" />
-				</view>
-				<view class="column-value" wx:if="{{'number' == item.inputType}}">
-					<input class="input" name="{{'atrributes' + item.attributeId}}" placeholder="请输入点检结果" type="digit" value="" />
-				</view>
-			</view>
-			<view class='column3-wrapper'>
-				<view class="agreement-box">
-					<checkbox-group name="{{'fault' + item.attributeId}}">
-						<checkbox class="checkbox" value="Y" />有故障
-					</checkbox-group>
-				</view>
-			</view>
+	<view class="mod-a top">
+		<view class="mod t-name">
+			<text class="key">设备编码：{{equipmentCode}}</text>
+			<text class="key1">点检部位：{{attributeType}}</text>
+			<input hidden='true' name='equipmentCode' value="{{equipmentCode}}" disabled="true" />
+			<input hidden='true' name='equipmentName' value="{{equipmentName}}" disabled="true" />
+			<input hidden='true' name='attributeType' value="{{attributeType}}" disabled="true" />
+			<input hidden='true' name='attribute6' value="{{attribute6}}" disabled="true" />
 		</view>
 	</view>
-	<!-- 时间 -->
-	<view class="mod">
-		<text>点检时间</text>
-		<picker mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
-			<view class="time">
-				<input type='text' name="checkDate" value='{{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}:{{dateTimeArray1[5][dateTime1[5]]}}' disabled="true" />
+
+  <view class="mod-a mt20" wx:if='{{attributes.length > 0}}' wx:for='{{attributes}}' wx:key='{{item.attributeId}}'>
+		<input hidden='true' name="{{'attributeName' + item.attributeId}}" value="{{item.attributeName}}" />
+		<view class="mod t-address">
+			<text class="key">点检内容</text>
+			<text class="value">{{item.attributeName}}</text>
+		</view>
+
+		<!-- 点检标准 -->
+		<view class="mod t-sign-time">
+			<text class="key">点检标准</text>
+			<text class="value">{{null == item.equipmentStandard ? '' : item.equipmentStandard}}</text>
+		</view>
+
+		<!-- 点检结果 -->
+		<view class="mod t-early">
+			<text class="key">点检结果</text>
+			<radio-group name="{{'atrributes' + item.attributeId}}" wx:if="{{'radio' == item.inputType}}" >
+				<radio value="N" checked="checked" />正常
+				<radio class="radio2" value="Y" checked="" />异常
+			</radio-group>
+			<view class="column-value" wx:if="{{'text' == item.inputType}}">
+				<input class="input" name="{{'atrributes' + item.attributeId}}" placeholder="请输入点检结果" value="" />
 			</view>
-		</picker>
+			<view class="column-value" wx:if="{{'number' == item.inputType}}">
+				<input class="input" name="{{'atrributes' + item.attributeId}}" placeholder="请输入点检结果" type="digit" value="" />
+			</view>
+		</view>
+
+		<!-- 是否有故障 -->
+		<view class="mod t-sign-time">
+			<text class="key">是否有故障</text>
+			<view class="agreement-box">
+				<checkbox-group name="{{'fault' + item.attributeId}}">
+					<checkbox class="checkbox" value="Y" />有故障
+				</checkbox-group>
+			</view>
+		</view>
+
+		<view class="mod t-sign-time">
+			<text class="key">故障原因</text>
+			<input class="input" name="{{'faultReason' + item.attributeId}}" placeholder="请输入故障原因"/>
+			<image class="arrow-r" src="../../../../img/arrow-r-0.png"></image>
+		</view>
 	</view>
-	<button class="add-btn" form-type="submit" hover-class="none">提交</button>
+	
+  <view class="mod-a">
+		<view class="mod t-name">
+      <text class="key">故障图片</text>
+		</view>
+    <view class="page-body">
+      <view class="page-body-wrapper">
+        <camera device-position="back" flash="off" binderror="error"></camera>
+        <view class="btn-area">
+          <button type="primary" bindtap="takePhoto">拍照</button>
+        </view>
+        <view class="preview-tips">预览</view>
+        <image class="preview-img" wx:if="{{src}}" mode="widthFix" src="{{src}}"></image>
+      </view>
+    </view>
+	</view>
+
+	<view class="mod-a top">
+		<view class="mod t-name">
+			<text>点检时间</text>
+			<picker mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
+				<view class="time">
+					<input type='text' name="checkDate" value='{{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}:{{dateTimeArray1[5][dateTime1[5]]}}' disabled="true" />
+				</view>
+			</picker>
+		</view>
+	</view>
+	<!-- 创建按钮 -->
+	<view class="create">
+			<button class="btn" form-type="submit" hover-class="none">保存</button>
+	</view>
 </form>

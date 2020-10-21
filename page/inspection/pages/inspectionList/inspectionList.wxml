@@ -1,0 +1,31 @@
+<view class='team-wrap'>
+  <view class='house-nav'>
+    <view class="house-history {{currentTab == 0 ? 'team-active' : ''}}" data-current='0' bindtap='switchNav'>全部</view>
+    <view class="house-history {{currentTab == 1 ? 'team-active' : ''}}" data-current='1' bindtap='switchNav'>合格</view>
+    <view class="house-history {{currentTab == 2 ? 'team-active' : ''}}" data-current='2' bindtap='switchNav'>未合格</view>
+  </view>
+<scroll-view class='container' scroll-top="{{scrollTop}}" scroll-y style="height: {{scrollHeight}}px" scroll-with-animation bindscroll="scroll">
+  <block wx:for-items="{{inspectionList}}">
+    <view class='card b-shadow' id="{{item.inspectionInfoId}}" bindtap="getDetail" data-name='{{item.inspectionInfoId}}@@{{item.inspectionResult}}'>
+      <view class='nearCard-fr'>
+        <view class="row-first">客户简称：
+          <text class='c-green'>{{item.customerShortName}}</text>
+        </view>
+        <view>业务员：
+          <text class='c-green'>{{item.saleName}}</text>
+        </view>
+        <view>验货日期：
+          <text class='c-green'>{{item.inspectionDate}}</text>
+        </view>
+        <view>验货结果：
+          <text class='c-green'>{{0 == item.inspectionResult ? '合格' : (1 == item.inspectionResult ? '不合格' : '待定')}}</text>
+        </view>
+        <view>备注：
+          <text class='c-green'>{{null == item.remark ? '' : item.remark}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<image src="../../../../img/top.png" style="width: 40px; height: 40px; position: fixed; right: 40px; bottom: 40px;" bindtap="goTop" wx:if="{{visual}}" class="{{animation}}" />
+</view>

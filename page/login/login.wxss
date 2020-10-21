@@ -1,6 +1,5 @@
-pages/login/login.wxss
 page{
-  background-color:#fff;
+  background-color:#ffffff;
   font-size:40rpx;
 }
 .login image{
