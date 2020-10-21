@@ -1,3 +1,38 @@
-<view style='padding : 10rpx;'>
-  <etable config="{{config}}"></etable>
+<view class='team-wrap'>
+  <view class='house-nav'>
+    <view class="house-history {{currentTab == 0 ? 'team-active' : ''}}" data-current='0' bindtap='switchNav'>全部</view>
+    <view class="house-history {{currentTab == 1 ? 'team-active' : ''}}" data-current='1' bindtap='switchNav'>已完成</view>
+    <view class="house-history {{currentTab == 2 ? 'team-active' : ''}}" data-current='2' bindtap='switchNav'>未完成</view>
+  </view>
+<scroll-view class='container' scroll-top="{{scrollTop}}" scroll-y style="height: {{scrollHeight}}px" scroll-with-animation bindscroll="scroll">
+  <block wx:for="{{repairFormLists}}" wx:key="repairFormId">
+    <view class='card b-shadow' bindtap="getDetail" data-name='{{item.repairFormId}}@@{{item.equipmentCode}}@@{{item.attributeType}}@@{{item.repairStatus}}@@{{item.faultDesc}}'>
+      <view class='nearCard-fr'>
+        <view>报修名称：
+          <text class='row-first'>{{item.repairFormName}}</text>
+        </view>
+        <view>报修设备：
+          <text class='c-green'>{{item.equipmentCode}} -- {{item.attributeType}}</text>
+        </view>
+        <view>报修时间：
+          <text class='c-green'>{{item.repairFormDate}}</text>
+        </view>
+        <view>报修人员：
+          <text class='c-row'>{{item.reportName}}</text>
+          维修人员：<text>{{item.repairName}}</text>
+        </view>
+        <view>完成情况：
+          <text class='c-green'>{{1 == item.repairStatus ? '已完成' : '未完成'}}</text>
+        </view>
+        <view>故障描述：
+          <textarea name="faultDesc" disabled="true" />
+        </view>
+        <view>故障图片：
+          <image class="preview-img" wx:if="{{item.attribute8}}" bindtap='previewImg' mode="widthFix" src="{{item.attribute8}}" data-currenturl='{{item.attribute8}}'></image>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<image src="../../../../img/top.png" style="width: 40px; height: 40px; position: fixed; right: 40px; bottom: 40px;" bindtap="goTop" wx:if="{{visual}}" class="{{animation}}" />
 </view>

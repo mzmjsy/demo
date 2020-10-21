@@ -82,12 +82,12 @@ Page({
 		var criteria = new Object();
     criteria._entity = 'com.md.ims.mdso.inspection.CrmInspectionInfo';
 
-    var expr = new Array();
-    var expr1 = new Object();
-    expr1.inspectionCode = userName;
-    expr1._op = "=";
-    expr.push(expr1);
-    criteria._expr = expr;
+    // var expr = new Array();
+    // var expr1 = new Object();
+    // expr1.inspectionCode = userName;
+    // expr1._op = "=";
+    // expr.push(expr1);
+    // criteria._expr = expr;
 
 		var orderby = new Object();
 		var orderbyArr = new Array();

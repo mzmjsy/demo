@@ -5,14 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    url1: '',
+    url2: '',
+    name1: '',
+    name2: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      url1: options.url1,
+      url2: options.url2 + '?flag=N',
+      name1: options.name1,
+      name2: options.name2
+    })
   },
 
   /**

@@ -1,0 +1,44 @@
+<form bindsubmit="formSubmit">
+  <view class="mod-a mt20">
+    <view class="mod t-sign-time">
+      <text class="key">发货单号</text>
+      <input class="input" name="deliveryCode" bindtap="toDelivery" value="{{deliveryCode}}" disabled="true" />
+      <image class="arrow-r" src='../../../../img/enter-icon.png'></image>
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">集装箱顺序号</text>
+      <input class="input" name="containerSeq" value="{{containerSeq}}" disabled="true" bindtap="toLoading" />
+      <image class="arrow-r" src='../../../../img/enter-icon.png'></image>
+    </view>
+    <view class="mod t-sign-time">
+      <text>监装日期</text>
+      <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+        <view class="date">
+          {{date}}<image class="arrow-d" src="../../../../img/arrow-d-0.png"></image>
+        </view>
+      </picker>
+    </view>
+    <view class="mod t-sign-time order">
+      <text class="key">备注</text>
+      <textarea name="remark" value="{{remark}}" maxlength='2000' />
+    </view>
+  </view>
+  <view class="mod-a">
+		<view class="mod t-name">
+      <text class="key">故障图片</text>
+		</view>
+    <view class="page-body">
+      <view class="page-body-wrapper">
+        <camera device-position="back" flash="off" binderror="error"></camera>
+        <view class="btn-area">
+          <button type="primary" bindtap="takePhoto">拍照</button>
+        </view>
+        <view class="preview-tips">预览</view>
+        <image class="preview-img" wx:if="{{src}}" mode="widthFix" src="{{src}}"></image>
+      </view>
+    </view>
+	</view>
+  <view class="create">
+    <button formType="submit" hover-class='none' class='btn'>保存</button>
+  </view>
+</form>

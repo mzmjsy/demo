@@ -31,6 +31,7 @@ Page({
       var retCode = data.retCode;
       var roleIds = '';
       var url = '../catalog/pages/catalog/catalog';
+      var url1,url2,name1,name2;
 
 			if ("0" == retCode) {
         wx.setStorageSync('sessionId', data.date.sessionId);
@@ -59,8 +60,22 @@ Page({
 
         log.info('登录用户名：' + params.userName + '登录权限：【' + wx.getStorageSync('admin') + '，' + wx.getStorageSync('check') + '，' + wx.getStorageSync('repair') + '】' + '，登录时间：' + common.formatTime(new Date()));
 
+        //验货处理
         if (roleIds.indexOf(601) >= 0) {
-          url = '../inspection/pages/mulu/mulu';
+          url1 = '/page/inspection/pages/inspectionList/inspectionList';
+          url2 = '/page/inspection/pages/inspection/inspection';
+          name1 = '验货列表';
+          name2 = '产品验货';
+          url = '../catalog/pages/mulu/mulu?url1='+url1+'&url2='+url2+'&name1='+name1+'&name2='+name2;
+        }
+
+        //分柜拍照
+        if (roleIds.indexOf(602) >= 0) {
+          url1 = '/page/container/pages/loadingList/loadingList';
+          url2 = '/page/container/pages/container/container';
+          name1 = '监装列表';
+          name2 = '信息录入';
+          url = '../catalog/pages/mulu/mulu?url1='+url1+'&url2='+url2+'&name1='+name1+'&name2='+name2;
         }
 
         wx.showToast({

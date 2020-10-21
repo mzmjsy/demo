@@ -160,9 +160,8 @@ const confirmPublish = (tempImagePath, callback) => {
     },
     success: (res) => {
       if (200 == res.statusCode && 'uploadFile:ok' == res.errMsg) {
-        let newName = tempImagePath.replace('http://tmp/', '');
-        let strLength = res.data.split(newName)[0].length;
-        let imgName = res.data.substring(strLength - 15, strLength) + newName;
+        let name = res.data.split('psel.value = "')[2];
+        let imgName = name.split('.jpg')[0] + '.jpg';
         callback(imgName);
       }
     },
