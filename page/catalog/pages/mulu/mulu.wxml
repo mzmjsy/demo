@@ -1,20 +1,14 @@
-<view class='nav'>
-  <view class='conlumn'>
-    <navigator url="{{url1}}" hover-class='navigator-hover'>
-      <image src='../../../../img/repair-bg.png' class='nav-pic'>
-        <view class='icon-wrap'>
-          <view>{{name1}}</view>
+<view class="row" wx:for="{{list}}" wx:key="" bindtap="rowTapped" data-id="{{item.url}}">
+    <!-- 头像 -->
+    <image src="{{item.imgUrl}}" />
+    <!-- 名称与语句 -->
+    <view class="content">
+        <view class="top">
+            <view class="nickname">{{item.shortName}}</view>
+            <view class="datetime">{{item.datetime}}</view>
         </view>
-      </image>
-    </navigator>
-  </view>
-  <view class='conlumn'>
-    <navigator url="{{url2}}" hover-class='none'>
-      <image src='../../../../img/check-bg.png' class='nav-pic'>
-        <view class='icon-wrap'>
-          <view>{{name2}}</view>
+        <view class="bottom">
+            <view class="sentence">{{item.content}}</view>
         </view>
-      </image>
-    </navigator>
-  </view>
+    </view>
 </view>

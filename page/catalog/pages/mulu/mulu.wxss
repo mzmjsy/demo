@@ -1,96 +1,57 @@
-/**index.wxss**/
-
-/* 轮播图 */
-.swiper {
-  height: 400rpx;
-}
-.slide-image {
-  width: 750rpx;
-  height: 400rpx;
-}
-
-/* 导航区 */
-
-.nav {
+.row {
   display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  width: 96%;
-  margin: 0 auto;
-  margin-top: 16rpx;
+  flex-direction: row;
+  align-items: center;
+  margin: 30rpx 30rpx 0 30rpx;
+  border-bottom: 1px solid #e8e8e8;
+  border-radius: 10px;
+  background-color: rgb(82, 182, 189);
 }
 
-.conlumn {
+/*头像*/
+.row image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  margin: 20rpx;
+}
+
+/*主体*/
+.content {
   display: flex;
-  flex-basis: 100%;
-  /* height: 200rpx; */
-  justify-content: space-around;
-  margin-top: 35rpx;
+  flex-direction: column;
+  width: 76%;
+  padding-left: 20rpx;
 }
 
-.conlumn .nav-pic {
-  width: 650rpx;
-  height: 150rpx;
-  position: relative;
-}
-
-.conlumn .nav-pic .icon-wrap {
-  position: absolute;
-  left: 15%;
-  top: 25%;
-  text-align: center;
-}
-
-.conlumn .nav-pic .icon-wrap image {
+/*昵称与日期*/
+.top, .bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: 104rpx;
 }
 
-.conlumn .nav-pic .icon-wrap view {
-  font-size: 50rpx;
-  color: #fff;
-  /* margin-top: 18rpx; */
-  padding-left: 60px;
+/*昵称*/
+.nickname {
+  color: #4d4d4d;
+  font-size: 45rpx;
 }
 
-.index-cont {
-  margin-top: 30rpx;
+/*日期*/
+.datetime {
+  padding: 10rpx;
+  font-size: 26rpx;
+  color: #b2b2b2;
 }
 
-.cont-title {
-  text-align: center;
-  margin-bottom: 20rpx;
-}
-
-.main-title {
-  font-size: 34rpx;
-  font-weight: bold;
-  letter-spacing: 2rpx;
-  color: #333;
-}
-
-.sub-head {
-  font-size: 30rpx;
-  color: #666;
-}
-
-.cont-photo {
-  width: 96%;
-  margin: 0 auto;
-  text-align: center;
-  margin-bottom: 50rpx;
-}
-
-.cont-photo image {
-  width: 710rpx;
-  height: 340rpx;
-  border-radius: 10rpx;
-}
-
-.cont-photo .pedia-title {
-  text-align: left;
-  font-size: 30rpx;
-  margin-left: 16rpx;
-  margin-top: 20rpx;
-  color: #333; 
+/*话语*/
+.sentence {
+    color: #ccc;
+    font-size: 28rpx;
+    margin-top: 6rpx;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
 }

@@ -20,15 +20,18 @@
   <block wx:for-items="{{deliverys}}">
     <view class='card b-shadow' id="{{item.deliveryHeadId}}" data-id='{{item.deliveryHeadId}}@{{item.deliveryCode}}' bindtap="getDelivery">
       <view class='nearCard-fr'>
-        <view class="row-first">发货单号：
+        <view class="row-first color">制单净重：
+          <text class='c-green'>{{item.salesAssistantCode}}</text>
+        </view>
+        <view class="color">发货单号：
           <text class='c-green'>{{item.deliveryCode}}</text>
         </view>
-        <view>客户信息：
+        <!-- <view>客户信息：
           <text class='c-green'>{{item.customerCode}}—{{item.customerShortName}}</text>
         </view>
         <view>跟单员：
           <text class='c-green'>{{item.salesAssistantCode}}</text>
-        </view>
+        </view> -->
         <view>实际发货日期：
           <text class='c-green'>{{item.realConfirmDate}}</text>
         </view>

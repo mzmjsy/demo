@@ -68,7 +68,7 @@ Page({
 		})
     var that = this;
     var criteria = new Object();
-    criteria._entity = 'com.sie.crm.pub.dataset.deliveryEntity.CrmLgDeliveryHeaderV';
+    criteria._entity = 'com.sie.crm.pub.dataset.deliveryEntity.CrmLgDeliveryHeader';
 
     var expr = new Array();
     var expr1 = new Object();
@@ -82,6 +82,16 @@ Page({
       expr2._op = "<=";
       expr.push(expr2);
     }
+    
+    var expr3 = new Object();
+    expr3.deliveryStatus = 'I';
+    expr3._op = "=";
+    expr.push(expr3);
+    
+    var expr4 = new Object();
+    expr4.status = 'B';
+    expr4._op = "=";
+    expr.push(expr4);
     criteria._expr = expr;
 
     var page = new Object();

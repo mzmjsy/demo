@@ -243,16 +243,17 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   width: 200rpx;
   height: 200rpx;
 }
+
 .preview-img {
-  width: 95%;
+  width: 97%;
   height: 200px;
-  margin: 0px 0px 10px 10px;
+  margin: 0px 0px 10px 5px;
   border-radius: 10px;
 }
 
 textarea {
-  width: 100%;
-  margin: 0px 0px 0px 8px;
+  width: 97%;
+  margin: 0px 0px 0px 5px;
   border-radius: 5px;
   background: #def0effd;
   height: 80px;

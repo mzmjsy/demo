@@ -89,6 +89,10 @@ Page({
     // expr.push(expr1);
     // criteria._expr = expr;
 
+    var page = new Object();
+    page.isCount = true;
+    page.length = 50000;
+
 		var orderby = new Object();
 		var orderbyArr = new Array();
 		orderby._sort = "desc";
@@ -98,7 +102,7 @@ Page({
 
     common.httpP('com.md.ims.mdso.crmsoordertipbiz.getCrmInspectionInfo.biz.ext', {
       criteria: criteria,
-      pageSize: 5000
+      page: page
 		}, function (data) {
       var crmInspectionInfo = data.data;
 			if (0 != crmInspectionInfo.length) {

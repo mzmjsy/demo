@@ -91,7 +91,7 @@ Page({
 
     var page = new Object();
     page.isCount = true;
-    page.length = 500;
+    page.length = 50000;
 
 		var orderby = new Object();
 		var orderbyArr = new Array();
@@ -102,7 +102,7 @@ Page({
 
     common.httpP('com.sie.crm.pub.baseconfig.pubAttanchment.getPubAttachment.biz.ext', {
       criteria: criteria,
-      pageSize: 5000
+      page: page
 		}, function (data) {
       var pubAttachment = data.data;
 			if (0 != pubAttachment.length) {

@@ -12,7 +12,9 @@
         "pages/catalog/catalog",
         "pages/factory/factory",
         "pages/mulu/mulu",
-        "pages/equipment/equipment"
+        "pages/equipment/equipment",
+        "pages/tainerindex/tainerindex",
+        "pages/inspecindex/inspecindex"
       ],
       "independent": false
     },

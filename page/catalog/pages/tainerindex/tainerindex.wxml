@@ -1,0 +1,20 @@
+<view class='nav'>
+  <view class='conlumn'>
+    <navigator url="{{url1}}" hover-class='navigator-hover'>
+      <image src='../../../../img/repair-bg.png' class='nav-pic'>
+        <view class='icon-wrap'>
+          <view>{{name1}}</view>
+        </view>
+      </image>
+    </navigator>
+  </view>
+  <view class='conlumn'>
+    <navigator url="{{url2}}" hover-class='none'>
+      <image src='../../../../img/check-bg.png' class='nav-pic'>
+        <view class='icon-wrap'>
+          <view>{{name2}}</view>
+        </view>
+      </image>
+    </navigator>
+  </view>
+</view>
