@@ -1,5 +1,6 @@
 const common = require('../../../../utils/util.js');
 const name = wx.getStorageSync('name');
+var src_array = [], imgUrlUpload = []; //上传图片路径数组
 
 Page({
   /**
@@ -11,7 +12,8 @@ Page({
     deliveryCode: '',
     summaryId: '',
     containerSeq: '',
-    imgUrl: ''
+    imgUrl: '',
+    src: [],
   },
 
   /**
@@ -21,6 +23,9 @@ Page({
     this.ctx = wx.createCameraContext();
   },
 
+  /**
+   * 拍照
+   */
   takePhoto() {
     var that = this;
     this.ctx.takePhoto({
@@ -38,8 +43,75 @@ Page({
         });
       }
     })
-	},
+  },
   
+  /**
+   * 从相册中选择
+   */
+  choosePhoto: function(){
+    var that = this;
+    wx.chooseImage({
+      count: 9, 
+      sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+      sourceType: ['album', 'camera'],      // album 从相册选图，camera 使用相机，默认二者都有
+      success: function(res){
+        src_array = src_array.concat(res.tempFilePaths)
+        that.setData({
+          src: src_array
+        })
+      }
+    })
+  },
+
+  //点击小图预览大图
+  previewImage: (e) => {
+    var index = e.currentTarget.dataset.index;
+    wx.previewImage({  
+      //当前显示下表   
+      current: src_array[index],
+      //数据源   
+      urls: src_array  
+    }) 
+  },
+
+  //删除图片
+  deleteImg: function(e){
+    let that = this;
+    let deleteImg = e.currentTarget.dataset.img;
+    let pics = that.data.src;
+    let newPics = [];
+    for (let i = 0; i < pics.length; i++){
+      //判断字符串是否相等
+      if (pics[i] !== deleteImg){
+        newPics.push(pics[i])
+      }
+    }
+    
+    that.setData({
+      src: newPics,
+      isShow: true
+    })
+    src_array = newPics;
+  },
+
+  //上传所选图片
+  uploadImg: function() {
+    wx.showLoading({
+			title: '图片上传中',
+			mask: true
+    })
+
+    for (var i = 0; i < src_array.length; i++) {
+      common.confirmPublish(src_array[i], function(data){
+        imgUrlUpload.push(common.wxUrl() + 'uploadFile/' + data);
+      });
+    }
+
+    setTimeout(() => {
+      wx.hideLoading();
+    }, 5000);
+  },
+
   //跳转到订单选择页面
   toDelivery: function () {
     wx.navigateTo({
@@ -73,13 +145,13 @@ Page({
   },
 
   //保存监装信息
-  addContainer:function(dt){
+  addContainer: function(dt, urls){
 		var that = this;
     wx.showLoading({
 			title: '保存中',
 			mask: true
     })
-    
+console.log(urls)
     var PubAttachment = new Object();
     PubAttachment.docVersion = that.data.deliveryHeadId;
     PubAttachment.moduleName = dt.deliveryCode;
@@ -87,19 +159,22 @@ Page({
     PubAttachment.documentNo = dt.containerSeq;
     PubAttachment.uploadDate = that.data.date;
     PubAttachment.remark = dt.remark;
-    PubAttachment.savedPath = that.data.imgUrl;
+    PubAttachment.savedPath = urls;
     PubAttachment.fileName = name;
-
+    console.log(urls.length)
+    console.log(PubAttachment.savedPath)
     //提交
 		common.httpP('com.sie.crm.pub.baseconfig.pubAttanchment.addPubAttachment.biz.ext', {
       PubAttachment: PubAttachment
 		}, function (data) {
 			if ("1" == data.code || '1' == data.count) {
-      wx.hideLoading();
+        wx.hideLoading();
 				wx.showToast({
 					title: '保存成功',
 					icon: 'success',
         })
+        src_array = [];
+        imgUrlUpload = [];
 			} else {
 				wx.showToast({
 					title: '保存失败',
@@ -111,9 +186,8 @@ Page({
   
   //保存按钮执行
 	formSubmit: function(e) {
-		let that = this;
     let containerSeq = e.detail.value.containerSeq;
-    let imgUrl = that.data.imgUrl;
+
     if (containerSeq == '' || containerSeq == null) {
 			wx.showModal({
         title: '提示',
@@ -122,16 +196,17 @@ Page({
         showCancel: false
       })
       return false;
-    } else if (null == imgUrl || '' == imgUrl) {
+    } else if (imgUrlUpload.length == 0) {
       wx.showModal({
         title: '提示',
-        content: '照片不可为空！',
+        content: '请先上传图片再保存！',
         confirmColor: '#b02923',
         showCancel: false
       })
       return false;
     }
-		that.addContainer(e.detail.value);
+    var urls = imgUrlUpload.toString();
+    this.addContainer(e.detail.value, urls);
 	},
 
   /**

@@ -1,6 +1,29 @@
 var app = getApp();
 const wxurl = app.globalData.wxUrl;
 const imsurl = app.globalData.imsUrl;
+const getMonthDate = flag => {
+  const date = new Date();
+  var year = date.getFullYear()
+  var month = date.getMonth()
+
+  if ("now" == flag) {
+    month = month + 1;
+  } else if ("next" == flag) {
+    month = month + 2;
+  }
+
+  if (0 == month) {
+    year = year - 1;
+    month = 12;
+  } else if (13 == month) {
+    year = year + 1;
+    month = 1;
+  }
+  const day = date.getDate()
+
+  return [year, month, day].map(formatNumber).join('-')
+}
+
 const formatDate = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -74,7 +97,7 @@ function httpP(url, data, callback) {
           });
         }
     },
-    fail: function(res){				
+    fail: function(res){console.log(res)	
       wx.hideLoading({
         complete(){
           wx.showModal({
@@ -148,6 +171,7 @@ function wxUrl() {
 }
 
 const confirmPublish = (tempImagePath, callback) => {
+  var fileTyp = tempImagePath.substring(tempImagePath.length - 4, tempImagePath.length);
   wx.uploadFile({
     url: wxurl + 'UploadServlet', //服务器地址
     header: {
@@ -161,11 +185,12 @@ const confirmPublish = (tempImagePath, callback) => {
     success: (res) => {
       if (200 == res.statusCode && 'uploadFile:ok' == res.errMsg) {
         let name = res.data.split('psel.value = "')[2];
-        let imgName = name.split('.jpg')[0] + '.jpg';
+        let imgName = name.split(fileTyp)[0] + fileTyp;
         callback(imgName);
       }
     },
     fail: (res) => {
+      wx.hideLoading();
       wx.showToast({
         title: '提示',
         content: '上传照相图片失败',
@@ -177,6 +202,7 @@ const confirmPublish = (tempImagePath, callback) => {
 }
 
 module.exports = {
+  getMonthDate: getMonthDate,
   formatDate: formatDate,
   formatTime: formatTime,
   httpP: httpP,

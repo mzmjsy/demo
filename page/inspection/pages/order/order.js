@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date: common.formatDate(new Date()),
-    date2: common.formatDate(new Date()),
+    date: common.getMonthDate("last"),  //当前日期上个月
+    date2: common.getMonthDate("next"), //当前日期下个月
     scrollHeight: wx.getSystemInfoSync().windowHeight,
     currentTab: 0,
     uhide: 0,
@@ -17,6 +17,7 @@ Page({
     customerId: '',
     orderNum: '',
     saleName: '',
+    empCode: '',
     empName: '',
     checkboxItems: [],
   },
@@ -28,7 +29,8 @@ Page({
     this.setData({
       customerId: options.customerId
     })
-    this.getOrders('','');
+
+    this.getOrders(this.data.date, this.data.date2);
   },
 
   goTop() {
@@ -66,7 +68,7 @@ Page({
     })
   },
 
-	//根据设备编码，获取该设备点检的属性
+	//根据客户ID、开始日期、结束日期，获取订单信息
 	getOrders: function (beginDate,endDate) {
 		wx.showLoading({
 			title: '数据正在请求中',
@@ -131,6 +133,7 @@ Page({
           order = new Object();
           order.orderNum = orderList['orderNum'];
           order.saleName = orderList['salesAssistantName'];
+          order.empCode = orderList['empcode'];
           order.empName = orderList['empname'];
           order.deliveryDate = orderList['deliveryDate'];
 
@@ -161,11 +164,13 @@ Page({
     var orderNum = e.currentTarget.dataset.name.split("@@")[0];
     var saleName = e.currentTarget.dataset.name.split("@@")[1];
     var empName = e.currentTarget.dataset.name.split("@@")[2];
+    var empCode = e.currentTarget.dataset.name.split("@@")[3];
 
     var items = new Object();
     items.id = orderNum;
     items.saleName = saleName;
     items.empName = empName;
+    items.empCode = empCode;
     
     if (values.length != 0) {
       items.check = true;
@@ -195,6 +200,7 @@ Page({
     var orderNum = '';
     var saleName = '';
     var empName = '';
+    var empCode = '';
 
     for(var i = 0; i < checkboxItems.length; i++){
       if (checkboxItems[i].check == true) {
@@ -230,6 +236,10 @@ Page({
       if (empName.indexOf(res[i]['empName']) < 0) {
         empName = empName + res[i]['empName'] + ',';
       }
+
+      if (empCode.indexOf(res[i]['empCode']) < 0) {
+        empCode = empCode + res[i]['empCode'] + ',';
+      }
     }
 
     let pages = getCurrentPages();//获取所有页面
@@ -243,6 +253,7 @@ Page({
         orderNum: orderNum.substring(0, orderNum.length - 1),
         saleName: saleName.substring(0, saleName.length - 1),
         empName: empName.substring(0, empName.length - 1),
+        empCode: empCode.substring(0, empCode.length - 1),
       })
       wx: wx.navigateBack({     //返回上一个页面
         delta: 1,

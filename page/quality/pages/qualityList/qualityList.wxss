@@ -260,8 +260,8 @@ textarea {
 }
 
 .addpic {
-  width: 130rpx;
-  height: 130rpx;
+  width: 300rpx;
+  height: 240rpx;
   margin: 0px 10px 10px 10px;
 }
 

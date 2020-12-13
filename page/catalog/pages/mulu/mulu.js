@@ -41,6 +41,17 @@ Page({
       obj.url = '../tainerindex/tainerindex?roleId=' + 602;
       list.push(obj);
     }
+    
+    if (roleIds.indexOf(603) >= 0) {
+      obj = new Object();
+      obj.imgUrl = '../../../../img/zhiliang.jpg';
+      obj.shortName = '质量资料上传';
+      obj.datetime = '';
+      obj.content = '流程卡及相关检验资料的照片上传系统';
+      obj.url = '../tainerindex/tainerindex?roleId=' + 603;
+      list.push(obj);
+    }
+
     this.setData({
       list: list
     })

@@ -1,4 +1,4 @@
-<form class="page" bindsubmit="bindSearchData" >
+<form class="page" >
   <view class="picker_group">
     <picker mode="date" value="{{date}}" end="{{date2}}" bindchange="bindDateChange">  
       <view class="picker">  
@@ -11,32 +11,35 @@
         {{date2}}
       </view>  
     </picker>
-    <button type="default" class="search" size="mini" form-type="submit">  
+    <button type="default" class="search" size="mini" form-type="submit" bindtap="bindSearchData">  
       查询
     </button>
   </view>
 </form>
 <scroll-view class='container' scroll-top="{{scrollTop}}" scroll-y style="height: {{scrollHeight}}px" scroll-with-animation bindscroll="scroll">
-  <block wx:for-items="{{deliverys}}">
-    <view class='card b-shadow' id="{{item.deliveryHeadId}}" data-id='{{item.deliveryHeadId}}@{{item.deliveryCode}}' bindtap="getDelivery">
+  <block wx:for-items="{{qualityInfos}}" wx:for-item="quality">
+    <view class='card b-shadow' id="{{quality.qualityInfoId}}" bindtap="getQualityInfo">
       <view class='nearCard-fr'>
-        <view class="row-first color">集装箱顺序号：
-          <text class='c-green'>{{item.documentNo}}</text>
+        <view class="row-first color">工步：
+          <text class='c-green'>{{quality.gongBu}}</text>
         </view>
-        <view class="color">发货单号：
-          <text class='c-green'>{{item.moduleName}}</text>
+        <view class="color">产品类别：
+          <text class='c-green'>{{quality.productClass}}</text>
+        </view>
+        <view class="color">资料名称：
+          <text class='c-green'>{{quality.infoName}}</text>
         </view>
         <view>备注：
-          <textarea name="remark" value="{{item.remark}}" maxlength='2000' />
+          <textarea name="remark" value="{{quality.remark}}" maxlength='2000' />
         </view>
       </view>
       <view class='nearCard-fr'>
-        监装图片：
+        资料图片：
       </view>
       <view class='block'>
-        <block wx:for="{{item.savedPath}}">
+        <block wx:for="{{quality.srcUrl}}">
           <view>
-            <image class='addpic' src='{{item}}' data-index="{{index}}" bindtap="previewImage"></image>
+            <image class='addpic' src='{{item}}' data-index="{{index}}" data-url="{{quality.srcUrl}}" bindtap="previewImage"></image>
           </view>
         </block>
       </view>

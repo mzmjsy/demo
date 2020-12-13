@@ -25,20 +25,24 @@
   </view>
   <view class="mod-a">
 		<view class="mod t-name">
-      <text class="key">故障图片</text>
+      <text class="key">监装图片</text>
 		</view>
     <view class="page-body">
-      <view class="page-body-wrapper">
-        <camera device-position="back" flash="off" binderror="error"></camera>
-        <view class="btn-area">
-          <button type="primary" bindtap="takePhoto">拍照</button>
-        </view>
-        <view class="preview-tips">预览</view>
-        <image class="preview-img" wx:if="{{src}}" mode="widthFix" src="{{src}}"></image>
+      <view class='addPics'>
+        <image class='addpic' src='../../../../img/plus2.jpg' bindtap='choosePhoto'></image>
+      </view>
+      <view class="block">
+        <block wx:for="{{src}}">
+          <view>
+            <image class='addpic' src='{{item}}' data-index="{{index}}" bindtap="previewImage"></image>
+            <image src="../../../../img/delete.jpg" class="uploadImg-error" data-img="{{item}}" bindtap='deleteImg'></image>
+          </view>
+        </block>
       </view>
     </view>
 	</view>
   <view class="create">
+    <button class='btn upload' bindtap="uploadImg">图片上传</button>
     <button formType="submit" hover-class='none' class='btn'>保存</button>
   </view>
 </form>

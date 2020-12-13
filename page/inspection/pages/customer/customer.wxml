@@ -16,7 +16,7 @@
           <text class='c-green'>{{item.customerCode}}</text>
         </view>
         <view>客户名称：
-          <text class='c-green'>{{item.customerName}}</text>
+          <text class='c-green'>{{null == item.customerName ? '' : item.customerName}}</text>
         </view>
         <view>客户简称：
           <text class='c-green'>{{item.customerShortName}}</text>

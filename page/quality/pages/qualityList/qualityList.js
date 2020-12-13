@@ -1,5 +1,4 @@
 const common = require('../../../../utils/util.js');
-var src_array = [];
 
 Page({
   /**
@@ -13,16 +12,14 @@ Page({
     uhide: 0,
     visual: false,
     animation: '',
-    deliverys: [],
-    deliveryHeadId: '',
-    deliveryCode: ''
+    qualityInfos: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getLoadingList('');
+    this.getQualityInfo();
   },
 
   goTop() {
@@ -60,35 +57,28 @@ Page({
     })
   },
 
-	//根据实际发货日期获取发货单
-	getLoadingList: function (endDate) {
+	//获取信息
+	getQualityInfo: function () {
 		wx.showLoading({
 			title: '数据正在请求中',
 			mask: true
 		})
-    var that = this;
+		var that = this;
     var criteria = new Object();
-    criteria._entity = 'com.sie.crm.pub.dataset.pubAttachmentConfig.PubAttachment';
+    criteria._entity = 'com.md.ims.mdso.tip.CrmQualityInfoV';
 
     var expr = new Array();
     var expr1 = new Object();
-    expr1.uploadDate = that.data.date;
+    expr1.createDate = that.data.date;
     expr1._op = ">=";
     expr.push(expr1);
 
-    if (null != endDate && '' != endDate) {
-      var expr2 = new Object();
-      expr2.uploadDate = endDate;
-      expr2._op = "<=";
-      expr.push(expr2);
-    }
-
-    var expr3 = new Object();
-    expr3.savedPath = 'https://www.vapp.meide-casting.com';
-    expr3._op = "like";
-    expr.push(expr3);
+		var expr2 = new Object();
+		expr2.createDate = that.data.date2;
+		expr2._op = "<=";
+		expr.push(expr2);
     criteria._expr = expr;
-
+    
     var page = new Object();
     page.isCount = true;
     page.length = 50000;
@@ -96,45 +86,50 @@ Page({
 		var orderby = new Object();
 		var orderbyArr = new Array();
 		orderby._sort = "";
-		orderby._property = "attachmentId";
+		orderby._property = "qualityInfoId";
 		orderbyArr.push(orderby);
     criteria._orderby = orderbyArr;
 
-    common.httpP('com.sie.crm.pub.baseconfig.pubAttanchment.getPubAttachment.biz.ext', {
+    common.httpP('com.md.ims.mdso.quality.getCrmQualityInfo.biz.ext', {
       criteria: criteria,
       page: page
 		}, function (data) {
-      var pubAttachment = data.data;
-      src_array = pubAttachment[0].savedPath.split(',');
-			if (0 != pubAttachment.length) {
-        pubAttachment[0].savedPath = src_array;
+			var crmQualityInfos = data.data;
+
+			if (0 != crmQualityInfos.length) {
+        for (var key in crmQualityInfos) {
+					var srcUrl = crmQualityInfos[key].attribute1.split(',');
+					crmQualityInfos[key].srcUrl = srcUrl;
+				}
         that.setData({
-          deliverys: pubAttachment
+          qualityInfos: crmQualityInfos
         });
         wx.hideLoading();
 			} else {
 				wx.showModal({
-					title: '当前没有监装数据',
+					title: '当前没有数据',
 					image: '../../../../img/fail.jpg'
 				})
 			}
 		});
   },
 
-  // 按实际发货日期段查询
+  // 按上传日期段查询
   bindSearchData () {
     var that = this;
-    that.getLoadingList(that.data.date2);
+    that.getQualityInfo();
   },
 
   //点击小图预览大图
-  previewImage: (e) => {
+	previewImage: (e) => {console.log(e)
     var index = e.currentTarget.dataset.index;
+		var urls = e.currentTarget.dataset.url;
+
     wx.previewImage({  
-      //当前显示下表   
-      current: src_array[index],
+      //当前显示下表
+      current: urls[index],
       //数据源   
-      urls: src_array  
+      urls: urls 
     }) 
   },
 

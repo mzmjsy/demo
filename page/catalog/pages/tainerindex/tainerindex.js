@@ -28,6 +28,13 @@ Page({
         name1: '监装列表',
         name2: '信息录入'
       })
+    } else if (603 == roleId){
+      this.setData({
+        url1: '/page/quality/pages/qualityList/qualityList',
+        url2: '/page/quality/pages/qualityInfo/qualityInfo?flag=N',
+        name1: '资料列表',
+        name2: '资料上传'
+      })
     }
   },
 

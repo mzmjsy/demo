@@ -18,6 +18,7 @@ Page({
     orderNum: '',
     saleName: '',
     inspectionResult: 0,
+    empCode: '',
     empName: '',
     remark: ''
   },
@@ -62,11 +63,9 @@ Page({
         url: '/page/inspection/pages/order/order?customerId=' + customerId
       })
     } else {
-      wx.showModal({
-        title: '提示',
-        content: '请先选择客户',
-        confirmColor: '#b02923',
-        showCancel: false
+      wx.showToast({
+        title: '请先选择客户',
+        icon: 'none'
       })
     }
   },
@@ -105,7 +104,6 @@ Page({
 		expr.push(expr1);
 		criteria._expr = expr;
 
-    //提交
 		common.httpP('com.md.ims.mdso.crmsoordertipbiz.getCrmInspectionInfo.biz.ext', {
       criteria: criteria
 		}, function (data) {
@@ -144,6 +142,9 @@ Page({
                 + "',inspection_date='" + dt['inspectionDate'] 
                 + "',inspection_result=" + dt['inspectionResult'] + ",remark='" + dt['remark'] + "'";
 
+    var insRe = 0 == dt['inspectionResult'] ? '合格' : (1 == dt['inspectionResult'] ? '不合格' : '待定');
+    var result = that.data.empCode + '@订单：' + dt['orderNum'] + '\n验货结果：' + insRe + '\n备注：' + dt['remark'];
+
     //提交
 		common.httpP(url, {
       CrmInspectionInfo: dt,
@@ -152,32 +153,53 @@ Page({
       idName: 'Inspection_Info_id',
       idValue: dt['inspectionInfoId']
 		}, function (data) {
-			if ("1" == data.code || '1' == data.count) {
-				wx.showToast({
-					title: '保存成功',
-					icon: 'success',
-        })
-			} else {
-				wx.showToast({
-					title: '保存失败',
-					image: '../../../../img/fail.jpg'
-				})
-			}
+      that.pushInfo(result);
+      setTimeout(() => {
+        wx.hideLoading();
+        if ("1" == data.code || '1' == data.count) {
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+          })
+        } else {
+          wx.showToast({
+            title: '保存失败',
+            image: '../../../../img/fail.jpg'
+          })
+        }
+      }, 3000);
+		});
+  },
+
+  //推送消息到业务员
+  pushInfo: function(result) {
+    common.httpP('com.sie.crm.pub.util.pubDatas.queryDataByNamingSql.biz.ext', {
+      orderId: result,
+      flag: 'pushInfo'
+		}, function (data) {
+      log.info('信息自动推送：' + result + '，返回结果' + data.message + '，时间：' + common.formatTime(new Date()));
 		});
   },
   
   //保存按钮执行
 	formSubmit: function(e) {
 		let that = this;
-    let result = e.detail.value.result;
-    if(result == '' ){
+    let inspection = e.detail.value;
+
+    if (inspection.orderNum == '') {
+      wx.showToast({
+				title: '请先选择订单号',
+				icon: "none"
+			})
+      return false;
+    } else if (inspection.result == '' ) {
 			wx.showToast({
 				title: '验货结论不可为空',
 				icon: "none"
 			})
       return false;
     }
-		that.addInspection(e.detail.value);
+		that.addInspection(inspection);
 	},
 
   /**
@@ -206,6 +228,10 @@ Page({
     } else if (currentPage.data.saleName) {
       that.setData({
         saleName: currentPage.data.saleName
+      })
+    } else if (currentPage.data.empCode) {
+      that.setData({
+        empCode: currentPage.data.empCode
       })
     }
   },

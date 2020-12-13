@@ -20,7 +20,7 @@
   <block wx:for-items="{{orders}}">
     <view class='card b-shadow' id="{{item.orderId}}" data-name='{{item.orderId}}'>
       <view class='nearCard-fr'>
-        <checkbox-group bindchange="checkboxChange" data-name='{{item.orderNum}}@@{{item.saleName}}@@{{item.empName}}'>
+        <checkbox-group bindchange="checkboxChange" data-name='{{item.orderNum}}@@{{item.saleName}}@@{{item.empName}}@@{{item.empCode}}'>
           <checkbox class="checkbox" value='{{item.orderNum}}' />
         </checkbox-group>
         <view class="row-first">订单号：

@@ -1,0 +1,50 @@
+<form bindsubmit="formSubmit">
+  <view class="mod-a mt20">
+    <picker mode="multiSelector" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="mod t-sign-time">
+        <text class="key">产品类别</text>
+        <input class="input" name="productClass" value="{{multiArray[0][multiIndex[0]]}}" disabled="true" />
+      </view>
+    </picker>
+    <view class="mod t-sign-time">
+      <text class="key">工步</text>
+      <input class="input" name="gongBu" value="{{multiArray[1][multiIndex[1]]}}" disabled="true" />
+    </view>
+    <view class="mod t-sign-time">
+      <text class="key">资料名称</text>
+      <input class="input put" name="infoName" value="" />
+    </view>
+
+    <view class="mod t-sign-time">
+      <text class="key">备注</text>
+      <input class="input put" name="remark" value="" />
+    </view>
+	</view>
+	
+  <view class="mod-a">
+		<view class="mod t-name">
+      <text class="key">资料图片</text>
+		</view>
+    <view class="page-body">
+      <view class="page-body-wrapper">
+        <camera device-position="back" flash="off" binderror="error"></camera>
+        <view class="btn-area">
+          <button type="primary" bindtap="takePhoto">拍照</button>
+        </view>
+        <view class="preview-tips">预览</view>
+        <view class="block">
+          <block wx:for="{{src}}">
+            <view>
+              <image class='addpic' src='{{item}}' data-index="{{index}}" bindtap="previewImage"></image>
+              <image src="../../../../img/delete.jpg" class="uploadImg-error" data-img="{{item}}" bindtap='deleteImg'></image>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+	</view>
+	<!-- 创建按钮 -->
+	<view class="create">
+			<button class="btn" form-type="submit" hover-class="none">保存</button>
+	</view>
+</form>

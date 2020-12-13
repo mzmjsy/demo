@@ -75,6 +75,15 @@
         "pages/loadingList/loadingList"
       ],
       "independent": false
+    },
+    {
+      "root": "page/quality/",
+      "name": "quality",
+      "pages": [
+        "pages/qualityList/qualityList",
+        "pages/qualityInfo/qualityInfo"
+      ],
+      "independent": false
     }
   ],
   "preloadRule":{
