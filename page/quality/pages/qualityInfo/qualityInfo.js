@@ -112,6 +112,15 @@ Page({
 	formSubmit: function (e) {
 		var that = this;
 		var data = e.detail.value;
+		var infoName = data['infoName'];
+
+		if ('' == infoName || null == infoName) {
+			wx.showToast({
+				title: '流程卡号不可为空',
+				icon: "none"
+			})
+			return false;
+		}
 
 	 	wx.showLoading({
 			title: '数据保存中'

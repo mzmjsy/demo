@@ -11,7 +11,7 @@
       <input class="input" name="gongBu" value="{{multiArray[1][multiIndex[1]]}}" disabled="true" />
     </view>
     <view class="mod t-sign-time">
-      <text class="key">资料名称</text>
+      <text class="key">流程卡号</text>
       <input class="input put" name="infoName" value="" />
     </view>
 

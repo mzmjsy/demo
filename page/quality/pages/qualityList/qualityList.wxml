@@ -26,11 +26,11 @@
         <view class="color">产品类别：
           <text class='c-green'>{{quality.productClass}}</text>
         </view>
-        <view class="color">资料名称：
-          <text class='c-green'>{{quality.infoName}}</text>
+        <view>流程卡号：
+          <text class='c-green'>{{null == quality.infoName ? '' : quality.infoName}}</text>
         </view>
         <view>备注：
-          <textarea name="remark" value="{{quality.remark}}" maxlength='2000' />
+          <text class='c-green'>{{null == quality.remark ? '' : quality.remark}}</text>
         </view>
       </view>
       <view class='nearCard-fr'>

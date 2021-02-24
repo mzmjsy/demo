@@ -59,7 +59,7 @@
 }
 
 .input {
-  text-align: right;
+  text-align: left;
   width: 215px;
 }
 
